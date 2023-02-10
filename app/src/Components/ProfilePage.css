@@ -1,0 +1,41 @@
+.TopBar{
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    background-color: gray;
+    top: 0px;
+    display: flex;
+    
+}
+
+
+.ProfilePage{
+    width: 100%;
+}
+
+
+.ProfilePicture{
+    height: 40vh;
+    background-color: rgb(151, 177, 231);
+    margin: auto;
+    align-items: center;
+    padding: 50px;
+}
+
+.ProfileInfoBox{
+    text-align: center;
+}
+
+.MyWorkoutsButton{
+    width: 80%;
+    height: 6vh;
+    margin: auto;
+}
+
+.Picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
+
+}

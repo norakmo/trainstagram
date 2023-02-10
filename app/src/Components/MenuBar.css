@@ -33,4 +33,11 @@
     height: 12%;
     bottom: 0;
     background-color: green;
+    text-align: center;
+  }
+
+
+  .CurrentGroupWrapper{
+    width: 100%;
+    text-align: center;
   }

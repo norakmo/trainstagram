@@ -19,13 +19,3 @@
     display: block;
   }
 
-  .FeedItem{
-    width:90%;
-    height: 50px;
-    border: 2px solid black;
-    border-radius: 6px;
-    margin: auto;
-    margin-bottom: 10px;
-    padding: 5px;
-    align-self: center;
-  }

@@ -4,7 +4,7 @@
     border-color: black;
     position: fixed;
     top: 0;
-    height: 12%;
+    height: 8%;
     overflow: auto;
     white-space: nowrap;
     display: inline-block;
@@ -20,5 +20,23 @@
     width: 100%;
     height: 12%;
     top: 0;
-    background-color: blue;
+    
+  }
+
+
+  .CurrentGroup{
+    bottom: 0px;
+    z-index: 100000;
+    text-align: center;
+    margin: auto;
+  }
+
+  .CurrentGroupWrapper{
+    width: 100%;
+    bottom: 0px;
+    height: 33%;
+    position: absolute;
+    z-index: 100000;
+    text-align: center;
+    margin: auto;
   }
