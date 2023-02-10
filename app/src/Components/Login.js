@@ -1,22 +1,46 @@
-import "./App.css";
-import handleSubmit from "./handles/handlesubmit";
-import { useRef } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import React from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase_setup/firebase";
 
-function App() {
-  const login = async () => {};
-  const forgotPasseor = async () => {};
-  const registerUser = async () => {};
+function LogIn() {
+  const [logInEmail, setLogInEmail] = useState("");
+  const [logInPassword, setLogInPassword] = useState("");
+
+  const logInUser = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        logInEmail,
+        logInPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
-    <div className="App">
-      <h1>Login User</h1>
+    <div className="Login">
+      <h1>Login to account</h1>
       <form>
-        <input type="text" placeholder=" email or username" />
-        <input type="text" placeholder=" password" />
-        <button> Login</button>
-        <a href="url">Forgot Password</a>
-        <a href="url">Create Account</a>
+        <input
+          placeholder="Email"
+          onChange={(event) => {
+            setLogInEmail(event.target.value);
+          }}
+        />
+        <input
+          placeholder="Password"
+          onChange={(event) => {
+            setLogInPassword(event.target.value);
+          }}
+        />
+        <button onClick={logInUser}> Login</button>
       </form>
+      <a href="/Register">Create an account</a>
     </div>
   );
 }
+
+export default LogIn;

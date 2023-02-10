@@ -1,7 +1,7 @@
 import "./App.css";
-/* import handleSubmit from "./handles/handlesubmit";*/
-import { useRef } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
+import Login from "./Components/Login";
 
 function App() {
   /* const dataRef = useRef();
@@ -11,9 +11,12 @@ function App() {
     dataRef.current.value = "";
   }; */
   return (
-    <div>
-      <Register></Register>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 

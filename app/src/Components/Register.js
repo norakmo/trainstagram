@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
+import React from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "firebase/auth";
-export default Register;
+import { auth } from "../firebase_setup/firebase";
 
-export function Register() {
+function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
@@ -25,21 +25,22 @@ export function Register() {
       <h1>Register User</h1>
       <form>
         <input
-          type="text"
           placeholder="Email"
           onChange={(event) => {
             setRegisterEmail(event.target.value);
           }}
         />
         <input
-          type="text"
           placeholder="Password"
           onChange={(event) => {
             setRegisterPassword(event.target.value);
           }}
         />
-        <button onClick={registerUser}> Create User</button>
+        <button onClick={registerUser}>Create User</button>
       </form>
+      <a href="/">Back to login</a>
     </div>
   );
 }
+
+export default Register;
