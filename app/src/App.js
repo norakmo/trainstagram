@@ -1,5 +1,8 @@
 import './App.css';
 import handleSubmit from './handles/handlesubmit';
+import MenuBar from './Components/MenuBar';
+import Feed from './Components/Feed';
+import GroupBar from './Components/GroupBar'
 import { useRef } from 'react';
 
 function App() {
@@ -12,84 +15,9 @@ function App() {
 
     return (
         <div>
-            <div class="GroupBar">
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-                <a class="GroupItem">PlaceHolder</a>
-            </div>
-            <div class="FeedContainer">
-                <div class="Feed">
-                    <p>heiFirst</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p><p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p>
-                    <p>hei</p><p>hei</p><p>hei</p><p>hei</p><p>heiLast</p>
-                </div>
-            </div>
-            <div class="MenubarContainer">
-                <table class="Menubar">
-                    <tr>
-                        <th class="MenuItem"><button class="MenuItemButton"></button></th>
-                        <th class="MenuItem"><button class="MenuItemButton"></button></th>
-                        <th class="MenuItem"><button class="MenuItemButton"></button></th>
-                        <th class="MenuItem"><button class="MenuItemButton"></button></th>
-                    </tr>
-                </table>
-            </div>
+            <GroupBar></GroupBar>
+            <Feed></Feed>
+            <MenuBar></MenuBar>
         </div>
     );
 }

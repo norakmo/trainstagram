@@ -1,0 +1,37 @@
+.FeedItem{
+    width:90%;
+    height: 80px;
+    margin: auto;
+    margin-bottom: 10px;
+    align-self: center;
+    display: flex;
+    border: none;
+  }
+
+  .FeedItemBox{
+    border: 2px solid black;
+    border-radius: 6px;
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .FeedItemProfile{
+    width: 10%;
+    border: 2px solid black;
+    border-radius: 30px;
+    display: inline-block;
+  }
+
+  .FeedItemTitle{
+    margin: 0px;
+  }
+
+  .FeedItemInfo{
+    display: flex;
+    margin: 0px;
+  }
+
+  .FeedItemInfoItem{
+    margin: 0px;
+  }
