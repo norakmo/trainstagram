@@ -1,4 +1,5 @@
-import { getFirestore } from "@firebase/firestore"
+import { getFirestore } from "@firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -15,12 +16,11 @@ const firebaseConfig = {
   storageBucket: "react-5fb04.appspot.com",
   messagingSenderId: "425544990871",
   appId: "1:425544990871:web:12600e5b742b1c2667a9d2",
-  measurementId: "G-5FCQ9PYWY7"
+  measurementId: "G-5FCQ9PYWY7",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-
-export const firestore = getFirestore(app)
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
