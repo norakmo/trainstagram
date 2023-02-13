@@ -1,5 +1,6 @@
 import React from "react";
 import './ProfilePage.css';
+import Avatar from '@mui/material/Avatar';
 import PropTypes from "prop-types";
 import Profilbilde from './Profilbilde.png'
 
