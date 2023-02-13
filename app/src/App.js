@@ -9,6 +9,7 @@ import Feed from './Components/Feed';
 import GroupBar from './Components/GroupBar';
 import MyWorkouts from './Components/MyWorkouts';
 import ProfilePage from './Components/ProfilePage';
+import FeedPage from './Components/FeedPage';
 
  
 function App() {
@@ -21,20 +22,24 @@ function App() {
   }
  
   return (
-  <div>
-            <GroupBar></GroupBar>
-            <Feed></Feed>
-            {/* <ProfilePage></ProfilePage> */}
-            {/* <MyWorkouts></MyWorkouts> */}
-            <MenuBar></MenuBar>
-        </div>
-
-<Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-      </Router>
+  <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/Profile" element ={
+            <div>
+              <ProfilePage/>
+              <MenuBar/>
+            </div>
+          }/>
+          <Route path="/Feed" element ={
+            <div>
+              <FeedPage/>
+              <MenuBar/>
+            </div>
+          }/>
+        </Routes>
+  </Router>
   );
 }
 
