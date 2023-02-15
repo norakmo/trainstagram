@@ -2,7 +2,7 @@
 class Cardio {
 
     constructor(type, distance, time) {
-        checkType(type);
+        this.checkType(type);
         this.type = type;
         this.distance = distance;
         this.time = time;
@@ -15,5 +15,5 @@ class Cardio {
             throw new Error("Invalid Exercise");
         }
     }
-  
 }
+module.exports = Cardio;

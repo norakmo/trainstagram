@@ -1,15 +1,14 @@
+import Strength from "../classes/Strength";
+import Cardio from "../classes/Cardio";
 
 class ExerciseSession {
-    constructor(strengthExercises) {
-        this.strengthExercises = strengthExercises;
-    }
 
-    constructor(cardioExercises) {
-        this.cardioExercises = cardioExercises;
+    constructor() {
     }
 
     strengthExercises = [];
     cardioExercises = [];
+
 
     addStrengthExercise(type, kg, reps, sets) {
         for (let i = 0; i < sets; i++) {
@@ -23,4 +22,12 @@ class ExerciseSession {
         this.cardioExercises.push(cardio);
     }
 
+     strengthExercises() {
+        return this.strengthExercises;
+    }
+
+    cardioExercises() {
+        return this.cardioExercises;
+    }
 }
+module.exports = ExerciseSession;
