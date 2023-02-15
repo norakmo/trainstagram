@@ -11,17 +11,17 @@ import MyWorkouts from './Components/MyWorkouts';
 import ProfilePage from './Components/ProfilePage';
 import FeedPage from './Components/FeedPage';
 
- 
+
 function App() {
-  const dataRef = useRef()
- 
-  const submithandler = (e) => {
-    e.preventDefault()
-    handleSubmit(dataRef.current.value)
-    dataRef.current.value = ""
-  }
- 
-  return (
+  const dataRef = useRef()
+
+  const submithandler = (e) => {
+    e.preventDefault()
+    handleSubmit(dataRef.current.value)
+    dataRef.current.value = ""
+  }
+
+  return (
   <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -40,7 +40,7 @@ function App() {
           }/>
         </Routes>
   </Router>
-  );
+  );
 }
 
 export default App;

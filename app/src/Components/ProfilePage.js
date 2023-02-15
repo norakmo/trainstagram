@@ -10,15 +10,17 @@ import Button from "@mui/material/Button";
 
 export default class ProfilePage extends React.Component{
 
-    
-
-    state={
-        name: "Navn navnesen",
-        DateOfBirth: "01.01.01",
-        height: 180,
-        weight: 80,
-        gender: "Male"
+    constructor(props){
+        super(props);
+        this.state={
+            name: "Navn Navnesen",
+            DateOfBirth: "01.01.01",
+            height: 180,
+            weight: 80,
+            gender: "Male"
+        }
     }
+    
 
     render(){
         return(
@@ -35,7 +37,7 @@ export default class ProfilePage extends React.Component{
                         <p>Kjønn: {this.state.gender}</p>
                         <Button variant="contained" 
                         onClick={() =>{
-                            //this.setState({name: "Bror"})
+                            this.setState({name: "Bror"})
                         }}
                         >Mine Økter</Button>
                     </div>
