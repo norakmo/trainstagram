@@ -1,24 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
   const [logInPassword, setLogInPassword] = useState("");
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  const logInUser = async () => {
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        setLoggedIn(true);
+      }
+    });
+  }, []);
+
+  const logInUser = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, logInEmail, logInPassword)
+      .then((userCredential) => {
+        console.log(userCredential);
+        navigate("/Feed");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.message);
+      });
+  };
+
+  /* const logInUser = async () => {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
         logInEmail,
         logInPassword
-      );
+        );
+        navigate("/Feed");
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      alert(error.message);
     }
+  }; */
+
+  const logOut = async () => {
+    await signOut(auth);
   };
 
   return (

@@ -1,28 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../firebase_setup/firebase";
 import { useNavigate } from "react-router-dom";
 import "./Login_Register.css";
 
 function Register() {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+  const [logInEmail, setLogInEmail] = useState("");
+  const [logInPassword, setLogInPassword] = useState("");
+  const [user, setUser] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  const registerUser = async () => {
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        setLoggedIn(true);
+      }
+    });
+  }, []);
+
+  const createUser = (event) => {
+    event.preventDefault();
+    createUserWithEmailAndPassword(auth, logInEmail, logInPassword)
+      .then((userCredential) => {
+        console.log(userCredential);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.message);
+      });
+  };
+
+  /* const logInUser = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        logInEmail,
+        logInPassword
       );
+      navigate("/Feed");
       console.log(user);
     } catch (error) {
       console.log(error.message);
+      alert(error.message);
     }
-  };
+  }; */
 
-  let navigate = useNavigate();
+  const logOut = async () => {
+    await signOut(auth);
+  };
 
   return (
     <div className="main">
