@@ -28,7 +28,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/Profile" element ={
             <div>
-              <ProfilePage/>
+              <ProfilePage props={{userId: "zEGkukLht4E88w8pFRrc"}}/>
               <MenuBar/>
             </div>
           }/>
