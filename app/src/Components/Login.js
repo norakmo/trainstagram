@@ -38,21 +38,6 @@ function LogIn() {
       });
   };
 
-  /* const logInUser = async () => {
-    try {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        logInEmail,
-        logInPassword
-        );
-        navigate("/Feed");
-      console.log(user);
-    } catch (error) {
-      console.log(error.message);
-      alert(error.message);
-    }
-  }; */
-
   const logOut = async () => {
     await signOut(auth);
   };
