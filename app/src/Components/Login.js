@@ -2,6 +2,7 @@ import { useState } from "react";
 import React from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase_setup/firebase";
+import "./Login_Register.css";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
@@ -21,24 +22,39 @@ function LogIn() {
   };
 
   return (
-    <div className="Login">
-      <h1>Login to account</h1>
-      <form>
-        <input
-          placeholder="Email"
-          onChange={(event) => {
-            setLogInEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password"
-          onChange={(event) => {
-            setLogInPassword(event.target.value);
-          }}
-        />
-        <button onClick={logInUser}> Login</button>
-      </form>
-      <a href="/Register">Create an account</a>
+    <div className="main">
+      <div className="wrapper">
+        <h1 className="product_title">Trainstagram</h1>
+        <h1 className="title">Login to account</h1>
+        <div className="container_form">
+          <form>
+            <div className="field">
+              <input
+                placeholder="Email"
+                onChange={(event) => {
+                  setLogInEmail(event.target.value);
+                }}
+              />
+            </div>
+            <div className="field">
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(event) => {
+                  setLogInPassword(event.target.value);
+                }}
+              />
+            </div>
+            <button className="btn" onClick={logInUser}>
+              Login
+            </button>
+            <div className="link">
+              Not signed up?
+              <a href="/Register">Create an account</a>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
