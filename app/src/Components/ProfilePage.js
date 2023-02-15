@@ -92,11 +92,7 @@ export default class ProfilePage extends React.Component {
                             <Textfield defaultValue={this.state.gender} id="genderTextField"/>:
                         this.state.gender}</p>
 
-                        <Button variant="contained"
-                            onClick={() => {
-                                this.setState({ name: "Bror" })
-                            }}
-                        >Mine Økter</Button>
+                        <Button variant="contained">Mine Økter</Button>
                         
                     </div>
                 </div>
