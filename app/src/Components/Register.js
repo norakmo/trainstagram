@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 import "./Login_Register.css";
 
 function Register() {
-  const [logInEmail, setLogInEmail] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
+  const [logInEmail, setRegisterEmail] = useState("");
+  const [logInPassword, setRegisterPassword] = useState("");
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Register() {
     });
   }, []);
 
-  const createUser = (event) => {
+  const registerUser = (event) => {
     event.preventDefault();
     createUserWithEmailAndPassword(auth, logInEmail, logInPassword)
       .then((userCredential) => {
@@ -62,7 +62,7 @@ function Register() {
       <div className="wrapper">
         <h1 className="title">Register User</h1>
         <div className="container_form">
-          <form>
+          <form onSubmit={registerUser}>
             <div className="field">
               <input
                 placeholder="Email"
@@ -80,13 +80,7 @@ function Register() {
                 }}
               />
             </div>
-            <button
-              className="btn"
-              onClick={() => {
-                registerUser();
-                navigate("/");
-              }}
-            >
+            <button className="btn" type="submit">
               Create User
             </button>
             <div className="link">

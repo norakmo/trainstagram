@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
@@ -62,7 +63,7 @@ function LogIn() {
         <h1 className="product_title">Trainstagram</h1>
         <h1 className="title">Login to account</h1>
         <div className="container_form">
-          <form>
+          <form onSubmit={logInUser}>
             <div className="field">
               <input
                 placeholder="Email"
@@ -80,7 +81,7 @@ function LogIn() {
                 }}
               />
             </div>
-            <button className="btn" onClick={logInUser}>
+            <button className="btn" type="submit">
               Login
             </button>
             <div className="link">
