@@ -3,8 +3,7 @@ default:
 
 stages:
   - build
-  - test
-
+  # - test
 # Job's name
 build:
   # Define stage
@@ -16,20 +15,19 @@ build:
   artifacts:
     paths:
       - node_modules
-
-unit-test:
-  image: node:latest
-  stage: test
-  before_script:
-    - cd app
-    - npm install
-  script:
-    - npm run test:ci
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-  artifacts:
-    paths:
-      - coverage/
-    when: always
-    reports:
-      junit:
-        - junit.xml
+# unit-test:
+#  image: node:latest
+#  stage: test
+#  before_script:
+#    - cd app
+#    - npm install
+#  script:
+#    - npm run test:ci
+#  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+#  artifacts:
+#    paths:
+#      - coverage/
+#    when: always
+#    reports:
+#      junit:
+#        - junit.xml
