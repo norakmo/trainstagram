@@ -10,6 +10,7 @@ import GroupBar from './Components/GroupBar';
 import MyWorkouts from './Components/MyWorkouts';
 import ProfilePage from './Components/ProfilePage';
 import FeedPage from './Components/FeedPage';
+import Program from './Components/ExerciseProgram';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/program" element={<Program />} />
           <Route path="/Profile" element ={
             <div>
               <ProfilePage props={{userId: "zEGkukLht4E88w8pFRrc"}}/>
