@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 import Profilbilde from "./Profilbilde.png";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Button from "@mui/material/Button";
-//import { user, setUser } from "./Login";
+import { getCurrentUser } from "./Auth";
+import { auth } from "../firebase_setup/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default class ProfilePage extends React.Component {
   constructor(props) {
@@ -20,8 +22,24 @@ export default class ProfilePage extends React.Component {
     };
   }
 
+  componentDidMount() {
+    getCurrentUser()
+      .then((user) => {
+        this.setState({ user });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  logOut = async () => {
+    await auth.signOut();
+    Navigate();
+  };
+
   render() {
-    //let user = user;
+    const { user } = this.state;
+
     return (
       <div>
         <div class="ProfilePage">
@@ -34,7 +52,7 @@ export default class ProfilePage extends React.Component {
           </div>
           <div class="ProfileInfoBox">
             <h1>{this.state.name}</h1>
-            <p>Bruker: {this.state.bruker}</p>
+            <p>Bruker: {user?.email}</p>
             <p>Fødselsdato: {this.state.DateOfBirth}</p>
             <p>Høyde: {this.state.height}</p>
             <p>Vekt: {this.state.weight}</p>
@@ -46,6 +64,16 @@ export default class ProfilePage extends React.Component {
               }}
             >
               Mine Økter
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              onClick={() => {
+                this.logOut();
+              }}
+            >
+              Log ut
             </Button>
           </div>
         </div>

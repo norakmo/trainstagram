@@ -8,7 +8,7 @@ import {
 import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
 import { useNavigate } from "react-router-dom";
-import { Auth, getCurrentUser } from "./Auth";
+import { getCurrentUser } from "./Auth";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
