@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
 import { useNavigate } from "react-router-dom";
+import { Auth, getCurrentUser } from "./Auth";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
@@ -17,12 +18,13 @@ function LogIn() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        setLoggedIn(true);
-      }
-    });
+    getCurrentUser()
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const logInUser = (event) => {
@@ -36,10 +38,6 @@ function LogIn() {
         console.log(error);
         alert(error.message);
       });
-  };
-
-  const logOut = async () => {
-    await signOut(auth);
   };
 
   return (
