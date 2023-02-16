@@ -49,13 +49,6 @@ export default class ProfilePage extends React.Component {
 
     handleEdit = () => {
         if(this.state.editMode){
-            /*console.log(
-                document.getElementById("nameTextField").value,
-                document.getElementById("dateOfBirthTextField").value,
-                document.getElementById("heightTextField").value,
-                document.getElementById("weightTextField").value,
-                document.getElementById("genderTextField").value
-            )*/
             this.setState({
                 name: document.getElementById("nameTextField").value,
                 DateOfBirth: document.getElementById("dateOfBirthTextField").value,
