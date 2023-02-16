@@ -1,18 +1,27 @@
-import { doc, collection, getDoc } from "@firebase/firestore"
+import { doc, collection, getDocs, where, query, addDoc} from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
 
 
 
 async function handleGetProfile(userId){
-    console.log(userId);
-    const docRef = doc(firestore, "Users", userId);
-    const docSnap = await getDoc(docRef);
+    console.log("get profile");
+    const docs = query(collection(firestore, "Users"), where("email", "==", userId));
+    const querySnapshot = await getDocs(docs);
+    if(!querySnapshot.empty){
+        return querySnapshot.docs[0].data();
+    }else{
+        const ref = collection(firestore, "Users")
+        const docData = {
+            email: userId,
+            name: "name",
+            dateOfBirth: "01.01.01",
+            height: 180,
+            weight: 80,
+            gender: "Male"
+        }
+        await addDoc(ref, docData);
 
-    if (docSnap.exists()) {
-        return docSnap.data();
-    } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
+        return handleGetProfile(userId);
     }
 }
 

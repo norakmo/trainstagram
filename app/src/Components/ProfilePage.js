@@ -16,7 +16,6 @@ import { touchRippleClasses } from "@mui/material";
 
 export default class ProfilePage extends React.Component {
     constructor(props) {
-        console.log(props.props.userId);
         super(props);
         this.state = {
             name: "name",
@@ -27,33 +26,28 @@ export default class ProfilePage extends React.Component {
             userId: props.props.userId,
             editMode: false
         }
-        try {
-            const promise = handleGetProfile(props.props.userId);
-
-            promise.then((data) => {
-                this.setState({
-                    name: data.name,
-                    //bruker: { user },
-                    DateOfBirth: data.dateOfBirth,
-                    height: data.height,
-                    weight: data.weight,
-                    gender: data.gender
-                });
-                console.log(data);
-            })
-        } catch (e) {
-            console.log("Cant load profile", e);
-        };
     }
 
     componentDidMount() {
         getCurrentUser()
             .then((user) => {
                 this.setState({ user });
+                const promise = handleGetProfile(user.email);
+                console.log(promise);
+                promise.then((data) => {
+                    this.setState({
+                        name: data.name,
+                        DateOfBirth: data.dateOfBirth,
+                        height: data.height,
+                        weight: data.weight,
+                        gender: data.gender
+                    });
+        })
             })
             .catch((error) => {
                 console.log(error);
             });
+
     }
 
     logOut = async () => {
@@ -70,13 +64,6 @@ export default class ProfilePage extends React.Component {
     handleEdit = () => {
         if (this.state.editMode) {
             this.setState({ editMode: false });
-            /*console.log(
-                document.getElementById("nameTextField").value,
-                document.getElementById("dateOfBirthTextField").value,
-                document.getElementById("heightTextField").value,
-                document.getElementById("weightTextField").value,
-                document.getElementById("genderTextField").value
-            )*/
             this.setState({
                 name: document.getElementById("nameTextField").value,
                 DateOfBirth: document.getElementById("dateOfBirthTextField").value,
@@ -98,7 +85,7 @@ export default class ProfilePage extends React.Component {
                     <div className="ProfilePicture">
                         <Avatar sx="width: 200px; height: 200px; margin: auto;" src={Profilbilde} alt="ProfilePicture" />
                     </div>
-                    <div class="ProfileInfoBox">
+                    <div className="ProfileInfoBox">
                         <h1>{this.state.editMode ?
                             <Textfield defaultValue={this.state.name} id="nameTextField" /> :
                             this.state.name}</h1>
@@ -116,7 +103,6 @@ export default class ProfilePage extends React.Component {
                             <Textfield defaultValue={this.state.gender} id="genderTextField" /> :
                             this.state.gender}</p>
 
-                        <Button variant="contained">Mine Økter</Button>
 
                     </div>
                 </div>
@@ -127,11 +113,14 @@ export default class ProfilePage extends React.Component {
                             <SettingsIcon />
                         }
                     </Button>
+                    <Button>
+                    Mine Økter
+                    </Button>
                     <Button onClick={() =>{
                         this.logOut();
                         window.location.href = "/";
                     }
-                    }>
+                    }>Logout
                     </Button>
 
                 </div>
