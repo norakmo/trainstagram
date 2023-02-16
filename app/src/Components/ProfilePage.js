@@ -33,8 +33,14 @@ export default class ProfilePage extends React.Component {
   }
 
   logOut = async () => {
-    await auth.signOut();
-    Navigate();
+    try {
+      const user = await getCurrentUser();
+      if (user) {
+        await auth.signOut();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -71,6 +77,7 @@ export default class ProfilePage extends React.Component {
               variant="contained"
               onClick={() => {
                 this.logOut();
+                window.location.href = "/";
               }}
             >
               Log ut
