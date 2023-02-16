@@ -1,9 +1,6 @@
 import React from "react";
-import Avatar from '@mui/material/Avatar';
 import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar, CardActionArea } from '@mui/material';
 import {ArrowBack} from '@mui/icons-material';
-import PropTypes from "prop-types";
-import Profilbilde from './Profilbilde.png'
 
 
 
@@ -24,9 +21,9 @@ export default class ExerciseProgram extends React.Component{
                     </AppBar>
 
                     <div>
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#FCD299' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
                                             Helvetesuke
@@ -36,15 +33,13 @@ export default class ExerciseProgram extends React.Component{
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
 
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                        
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#FCD299' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
                                             Rolig uke
@@ -54,15 +49,12 @@ export default class ExerciseProgram extends React.Component{
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
 
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#FCD299' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
                                             Muscle Month
@@ -72,9 +64,6 @@ export default class ExerciseProgram extends React.Component{
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
                     </div>

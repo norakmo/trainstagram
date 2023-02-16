@@ -1,9 +1,6 @@
 import React from "react";
-import Avatar from '@mui/material/Avatar';
 import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar, CardActionArea } from '@mui/material';
 import {ArrowBack} from '@mui/icons-material';
-import PropTypes from "prop-types";
-import Profilbilde from './Profilbilde.png'
 
 
 
@@ -18,70 +15,111 @@ export default class ExampleProgram extends React.Component{
                                 <ArrowBack />
                             </IconButton>
                             <Typography variant="h6" style = {{flexGrow: 1, textAlign: 'center'}}>
-                                Mine Programmer
+                                Helvetesuke
                             </Typography>
                         </Toolbar>
                     </AppBar>
 
                     <div>
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 1</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#99BADD' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Helvetesuke
+                                            Cardio
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            7 dager, 7 økter
+                                            Intervall, 6x6 løping
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
 
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 2</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+                        
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#FF7276' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Rolig uke
+                                            Styrke
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            7 dager, 4 økter
+                                            4 øvelser
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
 
-                        <Box style={{ backgroundColor: '#FBBF77' }} border={5} borderColor="white" borderRadius={2}>
-                            <Card style={{border: "0px solid black"}}>
-                                <CardActionArea>
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 3</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+                        
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#FF7276' }}>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Muscle Month
+                                            Styrke
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            30 dager, 20 økter
+                                            4 øvelser
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
-                                <Button size="small" color="primary">
-                                    Se mer
-                                </Button>
                             </Card>
                         </Box>
+
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 4</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+
+                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                            <Card>
+                                <CardActionArea style={{ backgroundColor: '#99BADD' }}>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            Cardio
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            Langtur, 10 km, 60 min
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
+                        </Box>
+
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 5</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 6</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
+
+                            <Box mb={1}>
+                                <Typography variant="h6" ml={2}>Dag 7</Typography>
+                            </Box>
+                            <Box border={1} borderColor="grey.400"></Box>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
                         <Button variant="contained" color="primary">
-                            Legg Til Nytt
+                            Legg Til Ny
                         </Button>
                     </div>
                 </div>
