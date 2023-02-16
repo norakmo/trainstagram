@@ -2,94 +2,140 @@ import React from "react";
 import "./ProfilePage.css";
 import Avatar from "@mui/material/Avatar";
 import PropTypes from "prop-types";
-import Profilbilde from "./Profilbilde.png";
-import SettingsIcon from "@mui/icons-material/Settings";
+import Profilbilde from './Profilbilde.png';
+import SettingsIcon from '@mui/icons-material/Settings';
+import CheckIcon from '@mui/icons-material/Check';
 import Button from "@mui/material/Button";
 import { getCurrentUser } from "./Auth";
 import { auth } from "../firebase_setup/firebase";
 import { useNavigate } from "react-router-dom";
+import Textfield from "@mui/material/TextField"
+import handleGetProfile from "../handles/handleGetProfile";
+import handleUpdateProfile from "../handles/handleUpdateProfile";
+import { touchRippleClasses } from "@mui/material";
 
 export default class ProfilePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "Navn Navnesen",
-      //bruker: { user },
-      DateOfBirth: "01.01.01",
-      height: 180,
-      weight: 80,
-      gender: "Male",
-    };
-  }
+    constructor(props) {
+        console.log(props.props.userId);
+        super(props);
+        this.state = {
+            name: "name",
+            DateOfBirth: "DateOfBirth",
+            height: "height",
+            weight: "weight",
+            gender: "gender",
+            userId: props.props.userId,
+            editMode: false
+        }
+        try {
+            const promise = handleGetProfile(props.props.userId);
 
-  componentDidMount() {
-    getCurrentUser()
-      .then((user) => {
-        this.setState({ user });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  logOut = async () => {
-    try {
-      const user = await getCurrentUser();
-      if (user) {
-        await auth.signOut();
-      }
-    } catch (error) {
-      console.log(error);
+            promise.then((data) => {
+                this.setState({
+                    name: data.name,
+                    //bruker: { user },
+                    DateOfBirth: data.dateOfBirth,
+                    height: data.height,
+                    weight: data.weight,
+                    gender: data.gender
+                });
+                console.log(data);
+            })
+        } catch (e) {
+            console.log("Cant load profile", e);
+        };
     }
-  };
 
-  render() {
-    const { user } = this.state;
+    componentDidMount() {
+        getCurrentUser()
+            .then((user) => {
+                this.setState({ user });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
-    return (
-      <div>
-        <div class="ProfilePage">
-          <div class="ProfilePicture">
-            <Avatar
-              sx="width: 200px; height: 200px; margin: auto;"
-              src={Profilbilde}
-              alt="ProfilePicture"
-            />
-          </div>
-          <div class="ProfileInfoBox">
-            <h1>{this.state.name}</h1>
-            <p>Bruker: {user?.email}</p>
-            <p>Fødselsdato: {this.state.DateOfBirth}</p>
-            <p>Høyde: {this.state.height}</p>
-            <p>Vekt: {this.state.weight}</p>
-            <p>Kjønn: {this.state.gender}</p>
-            <Button
-              variant="contained"
-              onClick={() => {
-                this.setState({ name: "Bror" });
-              }}
-            >
-              Mine Økter
-            </Button>
-          </div>
-          <div>
-            <Button
-              variant="contained"
-              onClick={() => {
-                this.logOut();
-                window.location.href = "/";
-              }}
-            >
-              Log ut
-            </Button>
-          </div>
-        </div>
-        <div class="TopBar">
-          <Button sx="right: 5px;">
-            <SettingsIcon />
-          </Button>
-        </div>
-      </div>
-    );
-  }
+    logOut = async () => {
+        try {
+            const user = await getCurrentUser();
+            if (user) {
+                await auth.signOut();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    handleEdit = () => {
+        if (this.state.editMode) {
+            this.setState({ editMode: false });
+            /*console.log(
+                document.getElementById("nameTextField").value,
+                document.getElementById("dateOfBirthTextField").value,
+                document.getElementById("heightTextField").value,
+                document.getElementById("weightTextField").value,
+                document.getElementById("genderTextField").value
+            )*/
+            this.setState({
+                name: document.getElementById("nameTextField").value,
+                DateOfBirth: document.getElementById("dateOfBirthTextField").value,
+                height: document.getElementById("heightTextField").value,
+                weight: document.getElementById("weightTextField").value,
+                gender: document.getElementById("genderTextField").value
+            })
+            handleUpdateProfile(this.state);
+        } else {
+            this.setState({ editMode: true });
+        }
+    }
+
+    render() {
+        const {user} = this.state;
+        return (
+            <div>
+                <div className="ProfilePage">
+                    <div className="ProfilePicture">
+                        <Avatar sx="width: 200px; height: 200px; margin: auto;" src={Profilbilde} alt="ProfilePicture" />
+                    </div>
+                    <div class="ProfileInfoBox">
+                        <h1>{this.state.editMode ?
+                            <Textfield defaultValue={this.state.name} id="nameTextField" /> :
+                            this.state.name}</h1>
+                        <p>Bruker: {user?.email}</p>
+                        <p>Fødselsdato: {this.state.editMode ?
+                            <Textfield defaultValue={this.state.DateOfBirth} id="dateOfBirthTextField" /> :
+                            this.state.DateOfBirth}</p>
+                        <p>Høyde: {this.state.editMode ?
+                            <Textfield defaultValue={this.state.height} id="heightTextField" /> :
+                            this.state.height}</p>
+                        <p>Vekt: {this.state.editMode ?
+                            <Textfield defaultValue={this.state.weight} id="weightTextField" /> :
+                            this.state.weight}</p>
+                        <p>Kjønn: {this.state.editMode ?
+                            <Textfield defaultValue={this.state.gender} id="genderTextField" /> :
+                            this.state.gender}</p>
+
+                        <Button variant="contained">Mine Økter</Button>
+
+                    </div>
+                </div>
+                <div className="TopBar">
+                    <Button onClick={this.handleEdit}>
+                        {this.state.editMode ?
+                            <CheckIcon /> :
+                            <SettingsIcon />
+                        }
+                    </Button>
+                    <Button onClick={() =>{
+                        this.logOut();
+                        window.location.href = "/";
+                    }
+                    }>
+                    </Button>
+
+                </div>
+            </div>
+        )
+    }
 }

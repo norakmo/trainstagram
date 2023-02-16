@@ -24,25 +24,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/Profile"
-            element={
-              <div>
-                <ProfilePage />
-                <MenuBar />
-              </div>
-            }
-          />
-
-          <Route
-            path="/Feed"
-            element={
-              <div>
-                <FeedPage />
-                <MenuBar />
-              </div>
-            }
-          />
+          <Route path="/Profile" element ={
+            <div>
+              <ProfilePage props={{userId: "zEGkukLht4E88w8pFRrc"}}/>
+              <MenuBar/>
+            </div>
+          }/>
+          <Route path="/Feed" element ={
+            <div>
+              <FeedPage/>
+              <MenuBar/>
+            </div>
+          }/>
         </Routes>
       </Router>
     </AuthProvider>
