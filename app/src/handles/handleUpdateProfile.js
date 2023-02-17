@@ -8,6 +8,7 @@ async function handleUpdateProfile(userData){
     
     const querySnapshot = await getDocs(docs);
     console.log(querySnapshot.docs[0].id);
+    
     const docRef = doc(collection(firestore, "Users"), querySnapshot.docs[0].id);
     await updateDoc(docRef, {
         name: userData.name,

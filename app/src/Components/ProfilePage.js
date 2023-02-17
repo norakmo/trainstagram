@@ -14,6 +14,7 @@ import handleGetProfile from "../handles/handleGetProfile";
 import handleUpdateProfile from "../handles/handleUpdateProfile";
 import { touchRippleClasses } from "@mui/material";
 import MyWorkouts from "./MyWorkouts";
+import FriendsList from "./FriendsList";
 
 
 
@@ -28,7 +29,8 @@ export default class ProfilePage extends React.Component {
             gender: "gender",
             userId: props.props.userId,
             editMode: false,
-            showWorkouts: false
+            showWorkouts: false,
+            showFriends: false
         }
     }
 
@@ -37,7 +39,6 @@ export default class ProfilePage extends React.Component {
             .then((user) => {
                 this.setState({ user });
                 const promise = handleGetProfile(user.email);
-                console.log(promise);
                 promise.then((data) => {
                     this.setState({
                         name: data.name,
@@ -83,7 +84,17 @@ export default class ProfilePage extends React.Component {
     }
 
     handleShowWorkouts = () => {
-        this.setState({showWorkouts: !this.state.showWorkouts});
+        this.setState({
+            showWorkouts: !this.state.showWorkouts,
+            showFriends: false
+        });
+    }
+
+    handleShowFriends = () => {
+        this.setState({
+            showFriends: !this.state.showFriends,
+            showWorkouts: false
+        });
     }
 
     render() {
@@ -92,7 +103,7 @@ export default class ProfilePage extends React.Component {
     
             <div>
                 {
-                !this.state.showWorkouts ?
+                !(this.state.showWorkouts || this.state.showFriends) ?
                 <div className="ProfilePage">
                     <div className="ProfilePicture">
                         <Avatar sx="width: 200px; height: 200px; margin: auto;" src={Profilbilde} alt="ProfilePicture" />
@@ -127,7 +138,8 @@ export default class ProfilePage extends React.Component {
                         
                     </div>
                 </div>
-                :
+                : this.state.showFriends ?
+                <FriendsList props={{email: this.state.user.email}}/> :
                 <MyWorkouts/>
                 }
                 <div className="TopBar">
@@ -144,8 +156,12 @@ export default class ProfilePage extends React.Component {
                             "Mine Økter"
                         }
                         </Button>
-                    <Button>
-                        Friends
+                    <Button onClick={this.handleShowFriends}>
+                        {
+                            this.state.showFriends ?
+                            "Profile" :
+                            "Friends"
+                        }
                     </Button>
                     <Button onClick={() =>{
                         this.logOut();
