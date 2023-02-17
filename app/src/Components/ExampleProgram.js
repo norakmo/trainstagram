@@ -3,6 +3,16 @@ import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar
 import {ArrowBack} from '@mui/icons-material';
 
 
+const program = [
+    [{type: "Cardio"}], 
+    [], 
+    [], 
+    [], 
+    [], 
+    [], 
+    [],
+];
+
 
 export default class ExampleProgram extends React.Component{
     render(){
