@@ -2,77 +2,51 @@ import React from "react";
 import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar, CardActionArea } from '@mui/material';
 import {ArrowBack} from '@mui/icons-material';
 
+const programData = [
+    {title: "Helvetesuke", content: "7 dager, 7 økter"},
+    {title: "Rolig uke", content: "7 dager, 4 økter"},
+    {title: "Muscle month", content: "30 dager, 20 økter"},
+];
 
 
 export default class ExerciseProgram extends React.Component{
     render(){
         return (
             <div>
+                <AppBar position = "static">
+                    <Toolbar edge = "start" aria-label="menu">
+                        <IconButton color="inherit">
+                            <ArrowBack />
+                        </IconButton>
+                        <Typography variant="h6" style = {{flexGrow: 1, textAlign: 'center'}}>
+                            Mine Programmer
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+
                 <div>
-                    <AppBar position = "static">
-                        <Toolbar edge = "start" aria-label="menu">
-                            <IconButton color="inherit">
-                                <ArrowBack />
-                            </IconButton>
-                            <Typography variant="h6" style = {{flexGrow: 1, textAlign: 'center'}}>
-                                Mine Programmer
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-
-                    <div>
-                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
+                    {programData.map((card, index) => (
+                        <Box key={index} border={8} borderColor="#FFFFFF" borderRadius={0}>
                             <Card>
                                 <CardActionArea style={{ backgroundColor: '#FCD299' }}>
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Helvetesuke
+                                        <Typography variant="h5" component="h2">
+                                            {card.title}
                                         </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            7 dager, 7 økter
+                                        <Typography variant="body2" component="p">
+                                            {card.content}
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
                             </Card>
                         </Box>
+                    ))}
+                </div>
 
-                        
-                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
-                            <Card>
-                                <CardActionArea style={{ backgroundColor: '#FCD299' }}>
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Rolig uke
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            7 dager, 4 økter
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Box>
-
-                        <Box border={10} borderColor="#FFFFFF" borderRadius={0}>
-                            <Card>
-                                <CardActionArea style={{ backgroundColor: '#FCD299' }}>
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
-                                            Muscle Month
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            30 dager, 20 økter
-                                        </Typography>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Box>
-                    </div>
-
-                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-                        <Button variant="contained" color="primary">
-                            Legg Til Nytt
-                        </Button>
-                    </div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
+                    <Button variant="contained" color="primary">
+                        Legg Til Nytt
+                    </Button>
                 </div>
             </div>
         )
