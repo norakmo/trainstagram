@@ -114,7 +114,10 @@ export default class ProfilePage extends React.Component {
                         }
                     </Button>
                     <Button>
-                    Mine Økter
+                        Mine Økter
+                    </Button>
+                    <Button>
+                        Friends
                     </Button>
                     <Button onClick={() =>{
                         this.logOut();
