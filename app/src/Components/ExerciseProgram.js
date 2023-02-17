@@ -3,9 +3,9 @@ import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar
 import {ArrowBack} from '@mui/icons-material';
 
 const programData = [
-    {title: "Helvetesuke", content: "7 dager, 7 økter"},
-    {title: "Rolig uke", content: "7 dager, 4 økter"},
-    {title: "Muscle month", content: "30 dager, 20 økter"},
+    {title: "Helvetesuke", content: "7 dager, 7 økter", programOwner: "Nora"},
+    {title: "Rolig uke", content: "7 dager, 4 økter", programOwner: "Sondre"},
+    {title: "Muscle month", content: "30 dager, 20 økter", programOwner: "Sunil"},
 ];
 
 
@@ -34,7 +34,7 @@ export default class ExerciseProgram extends React.Component{
                                             {card.title}
                                         </Typography>
                                         <Typography variant="body2" component="p">
-                                            {card.content}
+                                            {card.content}. Eier: {card.programOwner}
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>
