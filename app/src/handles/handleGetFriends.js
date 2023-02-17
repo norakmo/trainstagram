@@ -9,12 +9,16 @@ async function handleGetFriends(user){
 
     const q = query(collection(firestore, "Users"), where("email", "==", user));
     const querySnapshot = await getDocs(q);
+
+
     const friends = query(collection(firestore, "Users/" + querySnapshot.docs[0].id +"/Friends"))
     const friendsSnapshot = await getDocs(friends);
 
     let friendsData = [];
+
     const people = query(collection(firestore, "Users"));
     const peopleSnapshot = await getDocs(people);
+    
     let friendEmails = [];
 
     friendsSnapshot.docs.forEach((e) => {

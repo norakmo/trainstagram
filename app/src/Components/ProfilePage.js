@@ -115,6 +115,7 @@ export default class ProfilePage extends React.Component {
                             :
                             this.state.name
                         }</h1>
+                        <p>{user?.email}</p>
                         <p>Fødselsdato: {
                             this.state.editMode ?
                             <Textfield defaultValue={this.state.DateOfBirth} id="dateOfBirthTextField"/>

@@ -9,22 +9,18 @@ export default class FriendCard extends React.Component{
         console.log(props.props.data.data());
         super(props);
         this.state={
-            name: props.props.data.data().email,
+            name: props.props.data.data().name,
         }
     }
 
     render(){
         return(
-            <Card sx="margin: 5px; padding: 5px;  ">
-                
-                <div>
-                    <div>
-                        <Avatar/>
-                    </div>
+            <Card sx="margin: 5px; padding: 5px; display: flex; flex-direction: right; ">
+                    <Avatar sx="margin-right: 15px;"/>
                     <p>
                     {this.state.name}
                     </p>
-                </div>
+
             </Card>
         )
     }

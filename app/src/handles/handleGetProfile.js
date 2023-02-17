@@ -4,7 +4,6 @@ import { firestore } from "../firebase_setup/firebase"
 
 
 async function handleGetProfile(userId){
-    console.log("get profile");
     const docs = query(collection(firestore, "Users"), where("email", "==", userId));
     const querySnapshot = await getDocs(docs);
     if(!querySnapshot.empty){
