@@ -7,6 +7,7 @@ import Fab from "@mui/material/Fab"
 import Card from "@mui/material/Card"
 import TextField from "@mui/material/TextField"
 import "./FriendList.css";
+import handleUpdateFriends from "../handles/handleUpdateFriends";
 
 
 export default class FriendsList extends React.Component{
@@ -32,16 +33,16 @@ export default class FriendsList extends React.Component{
         })
     }
 
-    handleAddFriendComplete = () =>{
-        const newFriend = document.getElementById("emailOfNewFriend");
-        console.log(newFriend)
+    handleAddFriendComplete = (e) =>{
+        e.preventDefault();
+        console.log(this.state.emailToAdd);
+        handleUpdateFriends(this.state.email, false, this.state.emailToAdd);
         this.setState({
             addFriendState: false
         })
     }
 
     render(){
-        console.log(this.state.friends);
         return(
             <List sx="margin-top: 25px;">
                 {
@@ -56,9 +57,13 @@ export default class FriendsList extends React.Component{
                 {
                 this.state.addFriendState ?
                     <Card sx="margin: 5px; padding: 5px;">
-                        <form>
-                            <TextField sx="width: 80%;" helperText="email of friend to add" id="emailOfNewFriend"/>
-                            <Fab color="primary" aria-label="add" onClick={this.handleAddFriendComplete}>
+                        <form onSubmit={this.handleAddFriendComplete}>
+                            <TextField sx="width: 80%;" helperText="email of friend to add" id="emailOfNewFriend" onChange={(e)=>{
+                                this.setState({
+                                    emailToAdd: e.target.value
+                                });
+                            }}/>
+                            <Fab color="primary" aria-label="add" type="submit">
                                 <AddIcon />
                             </Fab>
                         </form>
