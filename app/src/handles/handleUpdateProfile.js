@@ -1,15 +1,15 @@
 import { doc, collection, setDoc, query, where, getDocs, updateDoc } from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
+import userEmailToId from "../utils/userEmailToId";
 
 
 async function handleUpdateProfile(userData){
 
-    const docs = query(collection(firestore, "Users"), where("email", "==", userData.user.email));
+    //get document reference
+    const userId = await userEmailToId(userData.user.email);
+    const docRef = doc(collection(firestore, "Users"), userId);
+
     
-    const querySnapshot = await getDocs(docs);
-    console.log(querySnapshot.docs[0].id);
-    
-    const docRef = doc(collection(firestore, "Users"), querySnapshot.docs[0].id);
     await updateDoc(docRef, {
         name: userData.name,
         dateOfBirth: userData.DateOfBirth,

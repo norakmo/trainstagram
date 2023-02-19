@@ -3,7 +3,14 @@ import { firestore } from "../firebase_setup/firebase"
 import userEmailToId from "../utils/userEmailToId";
 import isFriends from "../utils/isFriends";
 
-
+/**
+ * 
+ * 
+ * 
+ * @param {*} email profile to add friend to
+ * @param {*} friendEmail friend to add
+ * @returns 
+ */
 async function addFriend(email, friendEmail){
     try{
         console.log("adding friend");
@@ -12,13 +19,17 @@ async function addFriend(email, friendEmail){
         await addDoc(friends, {
             email: friendEmail
         })
-        return true;
     }catch(e){
-        console.log()
-        return false;
+        console.log(e)
     }
 }
 
+/**
+ * 
+ * 
+ * @param {*} email Profile to delete friend from
+ * @param {*} friendEmail Friend to delete
+ */
 async function removeFriend(email, friendEmail){
     try{
         const user1Id = await userEmailToId(email);
@@ -27,7 +38,7 @@ async function removeFriend(email, friendEmail){
         const friendId = querySnapshot.docs[0].id
         await deleteDoc(doc(firestore, "Users/" + user1Id +"/Friends", friendId));
     }catch(e){
-
+        console.log(e);
     }
 }
 
@@ -38,7 +49,6 @@ async function handleUpdateFriends(email, remove, friendEmail){
         const user2Exists = await userEmailToId(friendEmail);
         if(user1Exists && user2Exists){
             const friends = (await isFriends(email, friendEmail))
-            console.log(friends);
             if(!friends){
                 addFriend(email, friendEmail);
                 addFriend(friendEmail, email);
@@ -51,7 +61,6 @@ async function handleUpdateFriends(email, remove, friendEmail){
         const user2Exists = await userEmailToId(friendEmail);
         if(user1Exists && user2Exists){
             const friends = (await isFriends(email, friendEmail))
-            console.log(friends);
             if(friends){
                 removeFriend(email, friendEmail);
                 removeFriend(friendEmail, email);

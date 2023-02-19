@@ -38,7 +38,7 @@ export default class ProfilePage extends React.Component {
         getCurrentUser()
             .then((user) => {
                 this.setState({ user });
-                const promise = handleGetProfile(user.email);
+                const promise = handleGetProfile(user.email, false);
                 promise.then((data) => {
                     this.setState({
                         name: data.name,
@@ -47,12 +47,11 @@ export default class ProfilePage extends React.Component {
                         weight: data.weight,
                         gender: data.gender
                     });
-        })
+                })
             })
             .catch((error) => {
                 console.log(error);
             });
-
     }
 
     logOut = async () => {
