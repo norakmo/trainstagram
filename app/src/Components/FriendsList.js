@@ -36,7 +36,7 @@ export default class FriendsList extends React.Component {
     });
     promise.then(()=>{
       this.getFriendList();
-    })
+    });
   };
 
   handleRemoveFriend = (email) => {
@@ -45,12 +45,15 @@ export default class FriendsList extends React.Component {
     promise.then(()=>{
       this.getFriendList();
 
-    })
+    });
   };
 
   getFriendList() {
     //console.log("getting friends of user: " + this.state.email);
     const getFriends = handleGetFriends(this.state.email);
+    this.setState({
+      friends: "Empty"
+    })
     getFriends.then((friends) => {
       this.setState({
         friends: friends,

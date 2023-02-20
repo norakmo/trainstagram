@@ -19,7 +19,7 @@ async function handleGetFriends(email){
     //get list of profiles
     const people = query(collection(firestore, "Users"));
     const peopleSnapshot = await getDocs(people);
-
+    
 
     //for each profile check if it is a friend, if it is add it to friendsData.
     let friendEmails = [];

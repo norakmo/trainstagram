@@ -50,8 +50,8 @@ async function handleUpdateFriends(email, remove, friendEmail){
         if(user1Exists && user2Exists){
             const friends = (await isFriends(email, friendEmail))
             if(!friends){
-                addFriend(email, friendEmail);
-                addFriend(friendEmail, email);
+                await addFriend(email, friendEmail);
+                await addFriend(friendEmail, email);
             }
         }else{
             return false;
@@ -62,8 +62,8 @@ async function handleUpdateFriends(email, remove, friendEmail){
         if(user1Exists && user2Exists){
             const friends = (await isFriends(email, friendEmail))
             if(friends){
-                removeFriend(email, friendEmail);
-                removeFriend(friendEmail, email);
+                await removeFriend(email, friendEmail);
+                await removeFriend(friendEmail, email);
             }
         }else{
             return false;
