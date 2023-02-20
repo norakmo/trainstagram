@@ -1,5 +1,6 @@
-import { doc, collection, getDocs, where, query, addDoc} from "@firebase/firestore"
+import { doc, collection, getDocs, where, query, addDoc, deleteDoc} from "@firebase/firestore"
 import { firestore } from "../firebase_setup/firebase"
+import userEmailToId from "../utils/userEmailToId";
 
 
 
@@ -11,6 +12,11 @@ async function handleGetProfile(userEmail, retry){
 
     //if profiledata does not exist, create new doc with default data
     if(!querySnapshot.empty){
+        if(querySnapshot.docs.length === 2){
+            const falseId = await userEmailToId(querySnapshot.docs[1].data().email);
+            console.log("deleting second user: " + falseId);
+            await deleteDoc(doc(firestore, "Users", falseId));
+        }
         return querySnapshot.docs[0].data();
     }else{
         if(retry){
