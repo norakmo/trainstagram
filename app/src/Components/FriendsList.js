@@ -29,32 +29,43 @@ export default class FriendsList extends React.Component {
   handleAddFriendComplete = (e) => {
     e.preventDefault();
     console.log(this.state.emailToAdd);
-    handleUpdateFriends(this.state.email, false, this.state.emailToAdd);
+    const promise = handleUpdateFriends(this.state.email, false, this.state.emailToAdd);
     this.setState({
       addFriendState: false,
+      emailToAdd: ""
     });
-    this.getFriendList();
+    promise.then(()=>{
+      this.getFriendList();
+    })
   };
 
   handleRemoveFriend = (email) => {
     console.log(email);
-    handleUpdateFriends(this.state.email, true, email);
-    this.getFriendList();
+    const promise = handleUpdateFriends(this.state.email, true, email);
+    promise.then(()=>{
+      this.getFriendList();
+
+    })
   };
 
   getFriendList() {
+    //console.log("getting friends of user: " + this.state.email);
     const getFriends = handleGetFriends(this.state.email);
     getFriends.then((friends) => {
       this.setState({
         friends: friends,
       });
+    
     });
+    
   }
 
   render() {
+    console.log(this.state.friends);
     return (
       <List sx="margin-top: 25px;">
-        {this.state.friends === "Empty" ? (
+        {
+        this.state.friends === "Empty" ? (
           <p>Loading</p>
         ) : (
           this.state.friends.map((friend) => (

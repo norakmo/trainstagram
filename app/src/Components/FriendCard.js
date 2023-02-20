@@ -8,10 +8,16 @@ import "./FriendCard.css";
 
 
 export default class FriendCard extends React.Component{
+
+
     constructor(props){
         super(props);
         this.state={
-            name: props.props.data.data().name,
+            name: 
+                props.props.data.data().name !== "name" ?
+                props.props.data.data().name :
+                props.props.data.data().email,
+
             removeFriend: props.props.remove,
             email: props.props.data.data().email
         }

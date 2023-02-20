@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase_setup/firebase";
 import { useNavigate } from "react-router-dom";
 import "./Login_Register.css";
+import handleGetProfile from "../handles/handleGetProfile";
 
 function Register() {
   const [logInEmail, setRegisterEmail] = useState("");
@@ -31,6 +32,7 @@ function Register() {
       .then((userCredential) => {
         console.log(userCredential);
         navigate("/");
+        handleGetProfile(logInEmail, false);
       })
       .catch((error) => {
         console.log(error);
