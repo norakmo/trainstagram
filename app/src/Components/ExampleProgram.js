@@ -1,7 +1,10 @@
 import React from "react";
 import { Box, Button, Card, CardContent, Typography, AppBar, IconButton, Toolbar, CardActionArea } from '@mui/material';
 import {ArrowBack} from '@mui/icons-material';
+import getSessions from "../utils/getSessions";
 
+const sessions = getSessions();
+console.log(sessions)
 
 const program = [
     [{type: "Cardio"}], 
