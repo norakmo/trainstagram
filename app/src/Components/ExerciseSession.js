@@ -1,11 +1,12 @@
-import Strength from "../classes/Strength";
-import Cardio from "../classes/Cardio";
+import Strength from "./Strength";
+import Cardio from "./Cardio";
+import React from "react";
 
-class ExerciseSession {
 
-    constructor() {
-    }
+export default class ExerciseSession extends React.Component {
 
+
+ 
     strengthExercises = [];
     cardioExercises = [];
 
@@ -22,12 +23,24 @@ class ExerciseSession {
         this.cardioExercises.push(cardio);
     }
 
-     strengthExercises() {
+     strengthEx() {
         return this.strengthExercises;
     }
 
-    cardioExercises() {
+    cardioEx() {
         return this.cardioExercises;
+    } 
+
+    render () {
+        return (
+            <div>
+                <button>
+                    <a href="/Strength">Strength</a>
+                </button>
+                <button>
+                    <a href="/Cardio">Cardio</a>
+                </button>  
+            </div>              
+        );
     }
 }
-module.exports = ExerciseSession;

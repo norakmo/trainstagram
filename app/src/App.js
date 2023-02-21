@@ -8,6 +8,9 @@ import MenuBar from "./Components/MenuBar";
 import ProfilePage from "./Components/ProfilePage";
 import FeedPage from "./Components/FeedPage";
 import { AuthProvider } from "react-auth-kit";
+import ExerciseSession from "./Components/ExerciseSession";
+import Strength from "./Components/Strength";
+import Cardio from "./Components/Cardio";
 
 function App() {
   const dataRef = useRef();
@@ -17,6 +20,8 @@ function App() {
     handleSubmit(dataRef.current.value);
     dataRef.current.value = "";
   };
+
+  
 
   return (
     <AuthProvider>
@@ -43,6 +48,31 @@ function App() {
               </div>
             }
           />
+          <Route
+            path="/Exercise"
+            element={
+              <div>
+                <ExerciseSession />
+              </div>
+            }
+          />
+          <Route
+            path="/Strength"
+            element={
+              <div>
+                <Strength />
+              </div>
+            }
+          />
+          <Route
+            path="/Cardio"
+            element={
+              <div>
+                <Cardio />
+              </div>
+            }
+          />
+          
         </Routes>
       </Router>
     </AuthProvider>

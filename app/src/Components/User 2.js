@@ -1,6 +1,7 @@
 
 class User {
-
+    
+    //tlf og email også?
     constructor(name, age, height, weigth, gender, experience) {
         this.name = name;
         this.age = age;
@@ -10,31 +11,23 @@ class User {
         this.experience = experience;
     }
 
+
     friends = [];
 
     addFriend(friend) {
         this.friends.push(friend);
-        friend.push(this);
     }
 
     removeFriend(friend) {
-        this.friends.splice(this.friends.indexOf(friend), 1);
+        index = this.friends.indexOf(friend);
+        this.friends.splice(index, 1);
     }
 
-    name() {
+    get name() {
         return this.name;
     }
 
-    
-    experience() {
+    get experience() {
         return this.experience;
     }
-
-    friends() {
-        return this.friends;
-    }
 }
-
-module.exports = User;
-
-
