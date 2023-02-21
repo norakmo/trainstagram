@@ -1,7 +1,7 @@
 .list {
-    display: grid;
-    height: 10vh;
-    width: 10vw;
-    justify-content: center;
-    align-items: center;
+  display: grid;
+  height: 20vh;
+  width: 20vw;
+  justify-content: center;
+  align-items: center;
   }

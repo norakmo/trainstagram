@@ -1,6 +1,7 @@
 import React from "react";
 import Collapsible from 'react-collapsible';
-import {Box, Button, Card} from '@mui/material';
+import {Card} from '@mui/material';
+import "./Cardio.css";
 
 
 export default class Cardio extends React.Component {
@@ -37,28 +38,24 @@ export default class Cardio extends React.Component {
 
     render () {
         return (
-            <ul className="cardioList">
+            <ul className="list">
                 <li>
-                    <Box>
-                        <Card style= {{backgroundColor:"#FCD299"}}>
-                        <Collapsible trigger="Intervall" id="Intervall" onClick={() => this.setType("Intervall")}>
-                        <input type="text"  placeholder="distance" onChange={(event) => {this.setDistance(parseInt(event.target.value))}}></input>
-                        <input type="text" placeholder="time" onChange={(event) => {this.setTime(parseInt(event.target.value))}}></input>
-                        <button onClick={() => this.cardioExercises.push(new Cardio(this.type, this.distance, this.time))}is>add</button>
+                    <Card>
+                        <Collapsible trigger="Intervall" id="Intervall">
+                            <input type="text"  placeholder="distance" onChange={(event) => {this.setDistance(parseInt(event.target.value))}}></input>
+                            <input type="text" placeholder="time" onChange={(event) => {this.setTime(parseInt(event.target.value))}}></input>
+                            <button onClick={() => this.cardioExercises.push(new Cardio(this.type, this.distance, this.time))}>add</button>
                         </Collapsible>
-                        </Card>
-                    </Box>
+                    </Card>
                 </li>
                 <li>
-                    <Box>
-                        <Card style= {{backgroundColor:"#7FFFD4"}}>
+                    <Card>
                         <Collapsible trigger="Langkjøring" id="Langkjøring">
-                        <input type="text" id="distance" name="distance" placeholder="distance"></input>
-                        <input type="text" id="time" name="time" placeholder="time"></input>
-                        <button onClick={() => console.log(this.cardioExercises)}>add</button>
+                            <input type="text" id="distance" name="distance" placeholder="distance" onChange={(event) => {this.setDistance(parseInt(event.target.value))}}></input>
+                            <input type="text" placeholder="time" onChange={(event) => {this.setTime(parseInt(event.target.value))}}></input>
+                            <button onClick={() => this.cardioExercises.push(new Cardio(this.type, this.distance, this.time))}>add</button>
                         </Collapsible>
-                        </Card>
-                    </Box>
+                    </Card>
                 </li>
                 <li>
                     <button onClick={() => console.log(this.cardioExercises)} >ShoppingCart</button>
