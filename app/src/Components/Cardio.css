@@ -1,7 +1,43 @@
-.list {
+
+.cardio_main {
   display: grid;
-  height: 20vh;
-  width: 20vw;
-  justify-content: center;
-  align-items: center;
-  }
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(253, 84, 253, 0) 0%,
+    rgba(142, 56, 255, 0.5) 20%,
+    rgba(230, 44, 255, 0) 61%
+  );
+}
+
+.cardio_wrapper {
+  margin: auto;
+  height: 80%;
+  display: inline-block;
+}
+
+.cardio_title {
+  text-align: center;
+}
+
+.list {
+  width: 70%;
+  margin-left: 5%;
+  list-style: none;
+}
+
+.cardio_card {
+  padding: 10px 0 10px 0;
+  text-align: center;
+}
+
+.cardio_shoppingCart {
+  display: block;
+  margin: 20px auto;
+  width: 150px;
+  height: 40px;
+  background-color:  white; 
+  border:2px solid #1E90FF;
+  border-radius: 5px;
+}
+
