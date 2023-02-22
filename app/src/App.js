@@ -8,9 +8,6 @@ import MenuBar from "./Components/MenuBar";
 import ProfilePage from "./Components/ProfilePage";
 import FeedPage from "./Components/FeedPage";
 import { AuthProvider } from "react-auth-kit";
-import Program from './Components/ExerciseProgram';
-import Example from './Components/ExampleProgram';
-
 
 function App() {
   const dataRef = useRef();
@@ -27,20 +24,25 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/program" element={<Program />} />
-          <Route path="/example" element={<Example />} />
-          <Route path="/Profile" element ={
-            <div>
-              <ProfilePage props={{userId: "zEGkukLht4E88w8pFRrc"}}/>
-              <MenuBar/>
-            </div>
-          }/>
-          <Route path="/Feed" element ={
-            <div>
-              <FeedPage/>
-              <MenuBar/>
-            </div>
-          }/>
+          <Route
+            path="/Profile"
+            element={
+              <div>
+                <ProfilePage />
+                <MenuBar />
+              </div>
+            }
+          />
+
+          <Route
+            path="/Feed"
+            element={
+              <div>
+                <FeedPage />
+                <MenuBar />
+              </div>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
