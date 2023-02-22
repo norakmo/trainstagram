@@ -3,7 +3,8 @@ import { useState } from "react";
 import "./Strength.css";
 import Collapsible from 'react-collapsible';
 import { Card } from "@mui/material";
-import {addStrengthExercise, addCardioExercise} from "../handles/handleExercise"
+import addStrengthExercise from "../handles/handleStrengthExercise"
+import addCardioExercise from "../handles/handleCardioExercise"
 import { getCurrentUser } from "./Auth";
 import Cardio from "./Cardio";
 
@@ -17,19 +18,29 @@ export default class Strength extends React.Component {
         this.kg = kg;
         this.reps = reps;
         this.state = {
-            name: ""
+            name: "",
+            distance: "",
+            time: ""
         };
         this.sets = sets;
     }
 
-    constructor(type, distance, time) {
-        this.type = type;
-        this.distance = distance;
-        this.time = time;
+    distance() {
+        return null;
+    }
+
+    time() {
+        return null;
     }
 
     setName(name) {
         this.setState({ name });
+    }
+    setDistance(distance) {
+        this.setState({ distance });
+    }
+    setTime(time) {
+        this.setState({ time });
     }
 
     onClick1() {
@@ -135,7 +146,7 @@ export default class Strength extends React.Component {
                 console.log(user.email + "Vi er her nå ")
                 this.setType(Collapsible);
                 this.strengthExercises.push(new Cardio("Intervall", this.distance, this.time));
-                addCardioExercise(user.email, "Situps", this.kg, this.reps, this.sets, this.state.name); 
+                addCardioExercise(user.email, "Intervall", this.state.distance, this.state.time, this.state.name); 
             } else {
               // No user is signed in.
               console.log('No user is signed in.');
@@ -151,7 +162,7 @@ export default class Strength extends React.Component {
                 console.log(user.email + "Vi er her nå ")
                 this.setType(Collapsible);
                 this.strengthExercises.push(new Cardio("Langkjøring",this.distance, this.time));
-                addCardioExercise(user.email, "Situps", this.kg, this.reps, this.sets, this.state.name); 
+                addCardioExercise(user.email, "Langkjøring", this.state.distance, this.state.time, this.state.name); 
             } else {
               // No user is signed in.
               console.log('No user is signed in.');
@@ -194,13 +205,13 @@ export default class Strength extends React.Component {
         this.sets = sets;
     };
 
-    setDistance(distance) {
-        this.distance = distance;
-    };
+    // setDistance(distance) {
+    //     this.distance = distance;
+    // };
     
-    setTime(time) {
-        this.time = time;
-    };
+    // setTime(time) {
+    //     this.time = time;
+    // };
 
     render () {
         return (
@@ -270,17 +281,17 @@ export default class Strength extends React.Component {
                     <Card>
                         <Collapsible  trigger="Intervall" id="Intervall">
                         <input type="text" placeholder="distance" onChange={(event) => {this.setDistance(parseInt(event.target.value))}}></input>
-                        <input type="text" placeholder="time" onChange={(event) => {this.time(parseInt(event.target.value))}}></input>
+                        <input type="text" placeholder="time" onChange={(event) => {this.setTime(parseInt(event.target.value))}}></input>
                         <button onClick={() => this.onClick7()}>add</button>
                         </Collapsible>
                     </Card>
                 </li>
                 <li>
                     <Card>
-                        <Collapsible  trigger="Situps" id="Situps">
+                        <Collapsible  trigger="Langkjøring" id="Langkjøring">
                         <input type="text" placeholder="distance" onChange={(event) => {this.setDistance(parseInt(event.target.value))}}></input>
-                        <input type="text" placeholder="time" onChange={(event) => {this.time(parseInt(event.target.value))}}></input>
-                        <button onClick={() => this.onClick7()}>add</button>
+                        <input type="text" placeholder="time" onChange={(event) => {this.setTime(parseInt(event.target.value))}}></input>
+                        <button onClick={() => this.onClick8()}>add</button>
                         </Collapsible>
                     </Card>
                 </li>
