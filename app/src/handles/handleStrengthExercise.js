@@ -20,6 +20,8 @@ async function addStrengthExercise(email, type, kg, reps, sets, name) {
       firestore,
       "TrainingSessions/" + user1Id + "/økter/" + name + "/" + type
     );
+    console.log(kg + "dette er kg i addstrength");
+
     await addDoc(trainingSession, {
       Øvelse: type,
       Vekt: kg,
