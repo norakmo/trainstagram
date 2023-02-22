@@ -27,6 +27,7 @@
 }
 
 .cardio_card {
+  margin: auto;
   padding: 10px 0 10px 0;
   text-align: center;
 }
@@ -40,4 +41,3 @@
   border:2px solid #1E90FF;
   border-radius: 5px;
 }
-
