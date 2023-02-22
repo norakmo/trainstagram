@@ -1,32 +1,33 @@
-import { doc, collection, getDocs, where, query, addDoc, deleteDoc} from "@firebase/firestore"
-import { firestore } from "../firebase_setup/firebase"
+import {
+  doc,
+  collection,
+  getDocs,
+  where,
+  query,
+  addDoc,
+  deleteDoc,
+} from "@firebase/firestore";
+import { firestore } from "../firebase_setup/firebase";
 import userEmailToId from "../utils/userEmailToId";
 import isFriends from "../utils/isFriends";
-import Strength from "../Components/Strength"
+import Strength from "../Components/Strength";
 
-/**
- * 
- * 
- * 
- * @param {*} email profile to add friend to
- * @returns 
- */
 async function addStrengthExercise(email, type, kg, reps, sets, name) {
-    try{
-        console.log("adding exercise");
-        const user1Id = await userEmailToId(email);
-        const trainingSession = collection(firestore, "TrainingSessions/"+ user1Id + "/økter/"+ name+ "/" + type);
-        await addDoc(trainingSession, {
-           Øvelse: type,
-           Vekt: kg,
-           Antall: reps,
-           Sett: sets
-        })
-    }catch(e){
-        console.log(e);
-    }
+  try {
+    console.log("adding exercise");
+    const user1Id = await userEmailToId(email);
+    const trainingSession = collection(
+      firestore,
+      "TrainingSessions/" + user1Id + "/økter/" + name + "/" + type
+    );
+    await addDoc(trainingSession, {
+      Øvelse: type,
+      Vekt: kg,
+      Antall: reps,
+      Sett: sets,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 }
-
-
-
-export default {addStrengthExercise};
+export default addStrengthExercise;
