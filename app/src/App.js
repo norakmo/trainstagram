@@ -10,6 +10,8 @@ import FeedPage from "./Components/FeedPage";
 import { AuthProvider } from "react-auth-kit";
 import Strength from "./Components/Strength";
 import Cardio from "./Components/Cardio";
+import Programs from "./Components/ExerciseProgram";
+import Program from "./Components/Program";
 
 function App() {
   const dataRef = useRef();
@@ -26,6 +28,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/program" element={<Program />} />
           <Route
             path="/Strength"
             element={
