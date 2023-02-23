@@ -19,20 +19,20 @@ export default class Feed extends React.Component{
         getCurrentUser().then((user)=>{
             const TrainingSessions = handleGetTrainingSessions(user.email);
             TrainingSessions.then((Sessions)=>{
+                console.log(Sessions)
                 this.setState({
-                    sessions: Sessions
-                });
-                console.log(this.state.Sessions);
-            })
+                    sessions: Sessions,
+                },
+                () =>
+                {
+                    console.log(this.state.sessions);
+                })
+            });
+
         })
     }
 
     render(){
-        if(!(this.state.sessions === "empty")){
-            this.state.sessions.forEach((e)=>{
-                console.log(e);
-            })
-        }
         return(
             <div class="FeedContainer">
                 <div class="Feed">
@@ -40,7 +40,7 @@ export default class Feed extends React.Component{
                         this.state.sessions === "empty" ?
                         <p>Loading</p>
                         :
-                        this.state.sessions?.map((session)=>(
+                        this.state.sessions.map((session)=>(
                             <FeedItem props={{sessionData: session}}/>
                         ))
                         }
