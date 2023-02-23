@@ -8,7 +8,7 @@ import MenuBar from "./Components/MenuBar";
 import ProfilePage from "./Components/ProfilePage";
 import FeedPage from "./Components/FeedPage";
 import { AuthProvider } from "react-auth-kit";
-import ExerciseSession from "./Components/ExerciseSession";
+// import ExerciseSession from "./Components/ExerciseSession";
 import Strength from "./Components/Strength";
 import Cardio from "./Components/Cardio";
 
@@ -29,14 +29,14 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-        <Route
+        {/* <Route
           path="/Exercise"
           element={
             <div>
               <ExerciseSession />
             </div>
           }
-        />
+        /> */}
         <Route
           path="/Strength"
           element={
