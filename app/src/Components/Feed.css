@@ -1,21 +1,26 @@
 .Feed{
     height: 100%;
     width: 100%;
-    position:fixed;
-    /*background-color: red;*/
     overflow:auto;
     align-items: center;
     justify-content: center;
-  }
-  
-  .FeedContainer{
-    position:fixed;
+}
+
+  .FeedContainer {
     width: 100%;
-    height: 76%;
-    top: 12%;
+    height: 100vh;
     bottom: 12%;
     /*background-color: red;*/
     overflow: auto;
-    display: block;
+    padding-top: 5%;
+    display: grid;
+    background-image: linear-gradient(
+      to bottom right,
+      rgba(253, 84, 253, 0) 0%,
+      rgba(142, 56, 255, 0.5) 20%,
+      rgba(230, 44, 255, 0) 61%
+    );
+    background-size: 100% 100%;
   }
+  
 

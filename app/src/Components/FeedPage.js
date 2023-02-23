@@ -7,7 +7,7 @@ export default class FeedPage extends React.Component{
     render(){
         return(
             <div>
-                <GroupBar/>
+                {/* <GroupBar/> */}
                 <Feed/>
             </div>
         )
