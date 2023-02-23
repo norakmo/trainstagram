@@ -18,9 +18,10 @@ async function handleGetTrainingSessions(user){
             
             const exercises = await getDocs(collection(firestore, "TrainingSessions/" + friendId + "/økter/" + e.id + "/exercises"));
             console.log(exercises);
-            console.log(e.id);
+            console.log(e.data().owner);
             const Session = {
                 name: e.data().name,
+                owner: e.data().owner,
                 exercises: exercises.docs
             }
             sessions.push(Session);

@@ -31,7 +31,8 @@ async function addStrengthExercise(email, type, kg, reps, sets, name) {
       Sett: sets,
     });
     await setDoc(doc(firestore, "TrainingSessions/" + user1Id + "/økter", name), {
-      name: name
+      name: name,
+      owner: email
     })
   } catch (e) {
     console.log(e);
