@@ -14,13 +14,18 @@ async function handleGetTrainingSessions(user){
     for(let i = 0; i < friends.docs.length; i++){
         const friendId = await userEmailToId(friends.docs[i].data().email);
         const SessionsDocs = await getDocs(collection(firestore, "TrainingSessions/" + friendId + "/økter"));
-        SessionsDocs.docs.forEach((e)=>{
-            sessions.push(e);
+        SessionsDocs.docs.forEach(async (e)=>{
+            
+            const exercises = await getDocs(collection(firestore, "TrainingSessions/" + friendId + "/økter/" + e.id + "/exercises"));
+            console.log(exercises);
+            console.log(e.id);
+            const Session = {
+                name: e.data().name,
+                exercises: exercises.docs
+            }
+            sessions.push(Session);
         })
-        
     }
-
-    console.log(sessions);
     return sessions;
 
     

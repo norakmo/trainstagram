@@ -23,6 +23,7 @@ async function addStrengthExercise(email, type, kg, reps, sets, name) {
       "TrainingSessions/" + user1Id + "/økter/" + name + "/exercises"
     );
     console.log(kg + "dette er kg i addstrength");
+    console.log(kg +" "+ reps+ " " + sets);
     await addDoc(trainingSession, {
       Øvelse: type,
       Vekt: kg,

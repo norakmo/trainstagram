@@ -22,6 +22,7 @@ export default class Feed extends React.Component{
                 this.setState({
                     sessions: Sessions
                 });
+                console.log(this.state.Sessions);
             })
         })
     }
@@ -29,7 +30,7 @@ export default class Feed extends React.Component{
     render(){
         if(!(this.state.sessions === "empty")){
             this.state.sessions.forEach((e)=>{
-                console.log(e.data());
+                console.log(e);
             })
         }
         return(
