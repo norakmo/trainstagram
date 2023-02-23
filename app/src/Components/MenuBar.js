@@ -3,7 +3,10 @@ import './MenuBar.css';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import BottomNavigation from "@mui/material/BottomNavigation";
+import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import ExploreIcon from '@mui/icons-material/Explore';
+
 
 export default class MenuBar extends React.Component {
 
@@ -29,15 +32,19 @@ export default class MenuBar extends React.Component {
                     onChange={(event, newValue) => {
                         const navBarMap = new Map();
                         navBarMap.set(0, "/Feed");
-                        navBarMap.set(1, "/Feed");
-                        navBarMap.set(2, "/Profile");
+                        navBarMap.set(1, "/ExploreFeed");
+                        navBarMap.set(2, "/Strength");
+                        navBarMap.set(3, "/programs");
+                        navBarMap.set(4, "/Profile");
                         value=newValue;
                         window.location.href = navBarMap.get(newValue);
                         console.log(newValue);
                     }}
                 >
                     <BottomNavigationAction label="Feed" icon={<HomeIcon />} />
-                    <BottomNavigationAction label="Stuff" icon={<HomeIcon />} />
+                    <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+                    <BottomNavigationAction label="Session" icon={<SportsGymnasticsIcon />} />
+                    <BottomNavigationAction label="Programs" icon={<AccountBoxIcon />} />
                     <BottomNavigationAction label="Profie" icon={<AccountBoxIcon />} />
                 </BottomNavigation>
             </div>

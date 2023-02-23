@@ -8,6 +8,13 @@ import MenuBar from "./Components/MenuBar";
 import ProfilePage from "./Components/ProfilePage";
 import FeedPage from "./Components/FeedPage";
 import { AuthProvider } from "react-auth-kit";
+// import ExerciseSession from "./Components/ExerciseSession";
+import Strength from "./Components/Strength";
+import Cardio from "./Components/Cardio";
+import ExploreFeedPage from "./Components/ExploreFeedPage";
+import Programs from "./Components/ExerciseProgram";
+import AddProgram from "./Components/AddProgram";
+import Program from "./Components/Program";
 
 function App() {
   const dataRef = useRef();
@@ -24,25 +31,50 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/Profile"
-            element={
-              <div>
-                <ProfilePage />
-                <MenuBar />
-              </div>
-            }
-          />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/program" element={<AddProgram />} />
+          <Route path="/program2" element={<Program />} />
 
-          <Route
-            path="/Feed"
-            element={
-              <div>
-                <FeedPage />
-                <MenuBar />
-              </div>
-            }
-          />
+        {/* <Route
+          path="/Exercise"
+          element={
+            <div>
+              <ExerciseSession />
+            </div>
+          }
+        /> */}
+        <Route
+          path="/Strength"
+          element={
+            <div>
+              <Strength />
+              <MenuBar/>
+            </div>
+          }
+        />
+        <Route
+          path="/ExploreFeed"
+          element={
+            <div>
+              <ExploreFeedPage />
+              <MenuBar/>
+            </div>
+          }
+        />
+        
+          
+          <Route path="/Profile" element ={
+            <div>
+              <ProfilePage props={{userId: "zEGkukLht4E88w8pFRrc"}}/>
+              <MenuBar/>
+            </div>
+          }/>
+          <Route path="/Feed" element ={
+            <div>
+              <FeedPage/>
+              <MenuBar/>
+            </div>
+          }/>
         </Routes>
       </Router>
     </AuthProvider>

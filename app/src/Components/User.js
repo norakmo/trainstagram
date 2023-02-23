@@ -9,10 +9,12 @@ class User {
         this.gender = gender;
         this.experience = experience;
     }
+
     friends = [];
 
     addFriend(friend) {
         this.friends.push(friend);
+        friend.push(this);
     }
 
     removeFriend(friend) {

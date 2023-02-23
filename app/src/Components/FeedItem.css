@@ -1,19 +1,26 @@
 .FeedItem{
     width:90%;
-    height: 80px;
+    height: auto;
     margin: auto;
     margin-bottom: 10px;
     align-self: center;
     display: flex;
-    border: none;
+  }
+  .list {
+    width: 70%;
+    margin-left: 5%;
+    list-style: none;
   }
 
   .FeedItemBox{
+    display: block;
     border: 2px solid black;
     border-radius: 6px;
-    display: inline-block;
+    display: grid;
     width: 100%;
+    height:fit-content;
     padding: 10px;
+    position: relative;
   }
 
   .FeedItemProfile{
@@ -35,3 +42,40 @@
   .FeedItemInfoItem{
     margin: 0px;
   }
+
+  .ol-list {
+    list-style-type: lower-alpha;
+  }
+
+  .list-container {
+    list-style-type: lower-alpha;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .list-container > div {
+    flex: 1;
+  }
+
+  .button {
+  background-color: #0052A2; /* Green */
+  border-radius: 6px;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 10%;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height:fit-content;
+}
+
+.Collaps{
+  margin-bottom: 100px;
+}
