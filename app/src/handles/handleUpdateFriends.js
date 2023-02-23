@@ -43,6 +43,9 @@ async function removeFriend(email, friendEmail){
 }
 
 async function handleUpdateFriends(email, remove, friendEmail){
+    if(email === friendEmail){
+        return false;
+    }
 
     if(!remove){
         const user1Exists = await userEmailToId(email);
