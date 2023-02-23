@@ -2,23 +2,27 @@ import React from "react";
 import './FeedItem.css';
 import Avatar from "@mui/material/Avatar"
 import Profilbilde from './Profilbilde.png'
+import Collapsible from "react-collapsible";
+
 
 
 export default class FeedItem extends React.Component{
+
     render(){
         return(
             <div class="FeedItem">
                 <Avatar alt="Profile" src={Profilbilde}></Avatar>
                 <div class="FeedItemBox">
-                    <h3 class="FeedItemTitle">Title</h3>
-                    <div class="FeedItemInfo">
-                        <p class="FeedItemInfoItem">Name</p>
-                        <p class="FeedItemInfoItem">Type</p>
-                        <p class="FeedItemInfoItem">Duration</p>
-                    </div>
+                    <Collapsible trigger="Title">
+                        <div class="button-container">
+                            <button>Friends</button>
+                            <button>Sessions</button>
+                        </div>
+                    </Collapsible>      
                 </div>
+
             </div>
-        )
+        );
     }
 
 }
