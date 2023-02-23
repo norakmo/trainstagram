@@ -6,6 +6,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ExploreIcon from '@mui/icons-material/Explore';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 export default class MenuBar extends React.Component {
@@ -44,7 +45,7 @@ export default class MenuBar extends React.Component {
                     <BottomNavigationAction label="Feed" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
                     <BottomNavigationAction label="Session" icon={<SportsGymnasticsIcon />} />
-                    <BottomNavigationAction label="Programs" icon={<AccountBoxIcon />} />
+                    <BottomNavigationAction label="Programs" icon={<CalendarMonthIcon />} />
                     <BottomNavigationAction label="Profie" icon={<AccountBoxIcon />} />
                 </BottomNavigation>
             </div>
