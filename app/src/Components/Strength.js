@@ -691,9 +691,7 @@ export default class Strength extends React.Component {
           <button
             className="shoppingCart"
             onClick={() => console.log(this.strengthExercises)}
-          >
-            ShoppingCart
-          </button>
+          ></button>
         </div>
       </div>
     );
