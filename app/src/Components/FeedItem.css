@@ -1,13 +1,19 @@
 .FeedItem{
     width:90%;
-    height: 80px;
+    height: auto;
     margin: auto;
     margin-bottom: 10px;
     align-self: center;
     display: flex;
   }
+  .list {
+    width: 70%;
+    margin-left: 5%;
+    list-style: none;
+  }
 
   .FeedItemBox{
+    display: block;
     border: 2px solid black;
     border-radius: 6px;
     display: grid;
@@ -15,13 +21,6 @@
     height:fit-content;
     padding: 10px;
     position: relative;
-
-
-    /* display: grid;
-    height: 20vh;
-    width: 20vw;
-    justify-content: center;
-    align-items: center; */
   }
 
   .FeedItemProfile{
@@ -75,4 +74,8 @@
   top: 0;
   right: 0;
   height:fit-content;
+}
+
+.Collaps{
+  margin-bottom: 100px;
 }

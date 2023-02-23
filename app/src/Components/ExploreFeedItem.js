@@ -13,7 +13,7 @@ export default class ExploreFeedItem extends React.Component{
             <div class="FeedItem">
                 <Avatar alt="Profile" src={Profilbilde}></Avatar>
                 <div class="FeedItemBox">
-                    <p1>Friend</p1>
+                    <b>Friend</b>
                     <button class="button">Add</button>
                 </div>
 

@@ -26,7 +26,7 @@ export default class FeedItem extends React.Component{
             <div class="FeedItem">
                 <Avatar alt="Profile" src={Profilbilde}></Avatar>
                 <div class="FeedItemBox">
-                    <Collapsible trigger={this.state.name + "     " + this.state.owner}>
+                    <Collapsible trigger={this.state.name + "     " + this.state.owner}>;
                         <ol class="ol-list">
                             {
                                 this.state.exercises.map((e) =>(
