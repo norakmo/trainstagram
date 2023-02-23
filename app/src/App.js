@@ -11,6 +11,7 @@ import { AuthProvider } from "react-auth-kit";
 // import ExerciseSession from "./Components/ExerciseSession";
 import Strength from "./Components/Strength";
 import Cardio from "./Components/Cardio";
+import ExploreFeedPage from "./Components/ExploreFeedPage";
 
 function App() {
   const dataRef = useRef();
@@ -40,14 +41,15 @@ function App() {
           element={
             <div>
               <Strength />
+              <MenuBar/>
             </div>
           }
         />
         <Route
-          path="/Cardio"
+          path="/ExploreFeed"
           element={
             <div>
-              <Cardio />
+              <ExploreFeedPage />
             </div>
           }
         />

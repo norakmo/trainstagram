@@ -42,9 +42,19 @@
     margin: 0px;
   }
 
-  .button-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  align-items: flex-start;
+  .ol-list {
+    list-style-type: lower-alpha;
+  }
+
+  .list-container {
+    list-style-type: lower-alpha;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .list-container > div {
+    flex: 1;
   }

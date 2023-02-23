@@ -6,14 +6,14 @@ import Collapsible from "react-collapsible";
 
 
 
-export default class FeedItem extends React.Component{
+export default class ExploreFeedItem extends React.Component{
 
     render(){
         return(
             <div class="FeedItem">
                 <Avatar alt="Profile" src={Profilbilde}></Avatar>
                 <div class="FeedItemBox">
-                    <Collapsible trigger="Sondre">
+                    <Collapsible trigger="Hei">
                         <ol class="ol-list">
                             <li class="list-container">
                                 <b>Benk</b>
