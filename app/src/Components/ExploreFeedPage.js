@@ -1,14 +1,14 @@
 import React from "react";
-import Feed from './Feed';
+import ExploreFeed from './ExploreFeed';
 import ExploreBar from './ExploreBar';
 
-export default class ExploreFeed extends React.Component{
+export default class ExploreFeedPage extends React.Component{
     render(){
         return(
             <div class="FeedContainer">
                <div>
                 <ExploreBar/>
-                <Feed/>
+                <ExploreFeed/>
             </div>
             </div>
         )

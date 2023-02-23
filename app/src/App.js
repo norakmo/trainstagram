@@ -50,6 +50,7 @@ function App() {
           element={
             <div>
               <ExploreFeedPage />
+              <MenuBar/>
             </div>
           }
         />

@@ -44,7 +44,7 @@ export default class ExploreBar extends React.Component{
                 <a class="GroupItem">PlaceHolder</a>
             </div>
             <div class="CurrentGroupWrapper">
-                <h2 class="CurrentGroup">New friends</h2>
+                <h2 class="CurrentGroup">New Friends</h2>
             </div>
             </div>
         )

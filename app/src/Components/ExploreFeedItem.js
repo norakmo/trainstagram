@@ -13,22 +13,8 @@ export default class ExploreFeedItem extends React.Component{
             <div class="FeedItem">
                 <Avatar alt="Profile" src={Profilbilde}></Avatar>
                 <div class="FeedItemBox">
-                    <Collapsible trigger="Hei">
-                        <ol class="ol-list">
-                            <li class="list-container">
-                                <b>Benk</b>
-                                <p1>Vekt</p1>
-                                <p1>Kg</p1>
-                                <p1>Sets</p1>
-                            </li>
-                            <li class="list-container">
-                                <b>Mark</b>
-                                <p1>Vekt</p1>
-                                <p1>Kg</p1>
-                                <p1>Sets</p1>
-                            </li>
-                        </ol>
-                    </Collapsible>      
+                    <p1>Friend</p1>
+                    <button class="button">Add</button>
                 </div>
 
             </div>

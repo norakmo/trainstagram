@@ -32,7 +32,7 @@ export default class MenuBar extends React.Component {
                     onChange={(event, newValue) => {
                         const navBarMap = new Map();
                         navBarMap.set(0, "/Feed");
-                        navBarMap.set(1, "/Explore");
+                        navBarMap.set(1, "/ExploreFeed");
                         navBarMap.set(2, "/Strength");
                         navBarMap.set(3, "/Profile");
                         value=newValue;

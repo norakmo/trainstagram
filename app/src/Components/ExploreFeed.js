@@ -13,6 +13,21 @@ export default class ExploreFeed extends React.Component{
                         <ExploreFeedItem></ExploreFeedItem> 
                         <ExploreFeedItem></ExploreFeedItem> 
                         <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
+                        <ExploreFeedItem></ExploreFeedItem> 
     
                 </div>
             </div>

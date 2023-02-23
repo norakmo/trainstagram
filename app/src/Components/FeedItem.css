@@ -14,6 +14,8 @@
     width: 100%;
     height:fit-content;
     padding: 10px;
+    position: relative;
+
 
     /* display: grid;
     height: 20vh;
@@ -58,3 +60,19 @@
   .list-container > div {
     flex: 1;
   }
+
+  .button {
+  background-color: #0052A2; /* Green */
+  border-radius: 6px;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: 10%;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height:fit-content;
+}
