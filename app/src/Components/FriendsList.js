@@ -29,12 +29,16 @@ export default class FriendsList extends React.Component {
   handleAddFriendComplete = (e) => {
     e.preventDefault();
     console.log(this.state.emailToAdd);
-    const promise = handleUpdateFriends(this.state.email, false, this.state.emailToAdd);
+    const promise = handleUpdateFriends(
+      this.state.email,
+      false,
+      this.state.emailToAdd
+    );
     this.setState({
       addFriendState: false,
-      emailToAdd: ""
+      emailToAdd: "",
     });
-    promise.then(()=>{
+    promise.then(() => {
       this.getFriendList();
     });
   };
@@ -42,9 +46,8 @@ export default class FriendsList extends React.Component {
   handleRemoveFriend = (email) => {
     console.log(email);
     const promise = handleUpdateFriends(this.state.email, true, email);
-    promise.then(()=>{
+    promise.then(() => {
       this.getFriendList();
-
     });
   };
 
@@ -52,23 +55,20 @@ export default class FriendsList extends React.Component {
     //console.log("getting friends of user: " + this.state.email);
     const getFriends = handleGetFriends(this.state.email);
     this.setState({
-      friends: "Empty"
-    })
+      friends: "Empty",
+    });
     getFriends.then((friends) => {
       this.setState({
         friends: friends,
       });
-    
     });
-    
   }
 
   render() {
     console.log(this.state.friends);
     return (
       <List sx="margin-top: 25px;">
-        {
-        this.state.friends === "Empty" ? (
+        {this.state.friends === "Empty" ? (
           <p>Loading</p>
         ) : (
           this.state.friends.map((friend) => (

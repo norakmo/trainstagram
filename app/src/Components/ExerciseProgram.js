@@ -1,153 +1,174 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import ArrowBack from '@mui/icons-material/ArrowBack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import getProgram from "../handles/handleGetProgram";
+import getSessions from "../handles/handleGetSessions";
+import { getCurrentUser } from "./Auth";
 
+export default class ExerciseProgram extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      økter: [],
+      programmer: [],
+      newList: [],
+      øktIProgram: new Map(),
+    };
+  }
 
+  getProgramList() {
+    getCurrentUser()
+      .then((user) => {
+        if (user) {
+          const fetchSession = getSessions(user);
+          console.log(fetchSession + "dette er øktene");
+          fetchSession.then((økter) => {
+            this.setState(
+              {
+                økter: økter,
+              },
+              () => {
+                this.state.økter.forEach((økt) => {
+                  console.log(økt.name + "Hvor er vi");
+                });
+              }
+            );
+          });
 
+          const fetchProgram = getProgram(user.email);
+          console.log(fetchProgram + "dette er programmene");
+          fetchProgram.then((programmer) => {
+            this.setState(
+              {
+                programmer: programmer,
+              },
+              () => {
+                this.state.programmer.forEach((program) => {
+                  console.log(program.metaData.data());
+                  this.getCorrectExercises();
+                });
+              }
+            );
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-const trainingSessions = [
-    {
-        name: "Styrke 1",
-        numberOfExercises: 3,
-        exercises: [
-            {
-                name: "Benk",
-                sets: 3,
-                reps: 8,
-                vekt: 50,
-            },
-            {
-                name: "Situps",
-                sets: 3,
-                reps: 30,
-                vekt: 50,
-            },
-            {
-                name: "Pushups",
-                sets: 3,
-                reps: 20,
-                rest: 60,
-            },
-        ],
-    },
-    {
-        name: "Styrke 2",
-        numberOfExercises: 2,
-        exercises: [
-            {
-                name: "Squats",
-                sets: 3,
-                reps: 10,
-                vekt: 50,
-            },
-            {
-                name: "Situps",
-                sets: 3,
-                reps: 30,
-                vekt: 50,
-            },
-        ],
-    },
-    {
-        name: "Styrke 3",
-        numberOfExercises: 1,
-        exercises: [
-            {
-                name: "Markløft",
-                sets: 3,
-                reps: 10,
-                vekt: 100,
-            },
-        ],
-    },
-];
+  getSessionList() {
+    getCurrentUser()
+      .then((user) => {
+        if (user) {
+          this.getCorrectExercises();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
+  getCorrectExercises() {
+    console.log(this.state.programmer);
+    let øktIProgramMap = new Map();
+    this.state.programmer.forEach((program) => {
+      let newList = [];
+      øktIProgramMap.set(program.metaData.data().Navn, []);
+      this.state.økter.forEach((økt) => {
+        program.sessions.docs.forEach((øktIProgram) => {
+          if (øktIProgram.data().Navn === økt.name) {
+            øktIProgramMap.get(program.metaData.data().Navn).push(økt);
+            console.log("session added");
+          }
+        });
+        console.log(øktIProgramMap);
+        newList = [];
+      });
+    });
 
-const workoutPrograms = [
-    {
-        id: 1,
-        name: "Kom i gang",
-        duration: 3,
-        owner: "Tarjei",
-        days: [
-            [trainingSessions[0]],
-            [],
-            [trainingSessions[0], trainingSessions[2]],
-        ],
-    },
-    {
-        id: 2,
-        name: "Sterk uke",
-        duration: 7,
-        owner: "Ole",
-        days: [
-            [trainingSessions[0]],
-            [trainingSessions[1]],
-            [trainingSessions[2]],
-            [trainingSessions[1]],
-            [trainingSessions[0]],
-            [trainingSessions[2]],
-            [trainingSessions[1]],
-        ],
-    },
-];
+    this.setState({
+      øktIProgram: øktIProgramMap,
+    });
+  }
 
-let programState = 0;
+  render() {
+    return (
+      <div>
+        <AppBar position="static">
+          <Toolbar edge="start" aria-label="menu">
+            <IconButton color="inherit">
+              <ArrowBack />
+            </IconButton>
+            <Typography
+              variant="h6"
+              style={{ flexGrow: 1, textAlign: "center" }}
+            >
+              Mine Programmer
+            </Typography>
+          </Toolbar>
+        </AppBar>
 
-export default class ExerciseProgram extends React.Component{
-    render(){
-        return (
-            <div>
-                <AppBar position = "static">
-                    <Toolbar edge = "start" aria-label="menu">
-                        <IconButton color="inherit">
-                            <ArrowBack />
-                        </IconButton>
-                        <Typography variant="h6" style = {{flexGrow: 1, textAlign: 'center'}}>
-                            Mine Programmer
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
+        <div>
+          {this.state.programmer.map((program) => (
+            <Box border={8} borderColor="#FFFFFF" borderRadius={0}>
+              <Card>
+                <CardActionArea style={{ backgroundColor: "#FCD299" }}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      {program.metaData.data().Navn}
+                    </Typography>
 
-                <div>
-                    {workoutPrograms.map((card, index) => (
-                        <Box key={index} border={8} borderColor="#FFFFFF" borderRadius={0}>
-                            <Link to="/program" onClick={() => programState = index}>
-                                <Card>
-                                    <CardActionArea style={{ backgroundColor: '#FCD299' }}>
-                                        <CardContent>
-                                            <Typography variant="h5" component="h2">
-                                                {card.name}
-                                            </Typography>
-                                            <Typography variant="body2" component="p">
-                                                {card.days.length} økter på {card.duration} dager. Eier: {card.owner}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Link>
-                        </Box>
-                    ))}
-                </div>
+                    {console.log(this.state.øktIProgram)}
+                    {this.state.øktIProgram.has(
+                      program.metaData.data().Navn
+                    ) ? (
+                      this.state.øktIProgram
+                        .get(program.metaData.data().Navn)
+                        .map((økt) => (
+                          <Typography variant="body2" component="p">
+                            {økt.name}
+                          </Typography>
+                        ))
+                    ) : (
+                      <p></p>
+                    )}
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Box>
+          ))}
+        </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
-                    <Button variant="contained" color="primary">
-                        Legg Til Nytt
-                    </Button>
-                </div>
-            </div>
-        )
-    }
+        <div
+          style={{ display: "flex", justifyContent: "center", marginTop: 10 }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              this.getProgramList();
+              this.getSessionList();
+            }}
+          >
+            Last in programmer
+          </Button>
+          <Link to="/program">
+            <Button variant="contained" color="primary" onClick={() => {}}>
+              Legg Til Nytt
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
-
-export {workoutPrograms}
-export {programState}

@@ -11,6 +11,7 @@ import { AuthProvider } from "react-auth-kit";
 import Strength from "./Components/Strength";
 import Cardio from "./Components/Cardio";
 import Programs from "./Components/ExerciseProgram";
+import AddProgram from "./Components/AddProgram";
 import Program from "./Components/Program";
 
 function App() {
@@ -29,7 +30,9 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/programs" element={<Programs />} />
-          <Route path="/program" element={<Program />} />
+          <Route path="/program" element={<AddProgram />} />
+          <Route path="/program2" element={<Program />} />
+
           <Route
             path="/Strength"
             element={
