@@ -32,7 +32,9 @@ export default class ProfilePage extends React.Component {
             showWorkouts: false,
             showFriends: false,
             currentDay: 1,
-            exercisedToday: "No"
+            exercisedToday: "No",
+            streak: 0,
+            lastExercise: 0
         }
     }
 
@@ -100,10 +102,23 @@ export default class ProfilePage extends React.Component {
 
     handleUpdateDay = () => {
         this.setState({ currentDay: this.state.currentDay + 1 });
+        this.setState({ exercisedToday: "No"});
+        if (this.state.currentDay !== (this.state.lastExercise)) {
+            this.setState({ streak: 0 });
+            this.setState({ lastExercise: this.state.currentDay});
+        }
     }
 
     handleExercisedToday = () => {
         this.setState({ exercisedToday: "Yes" });
+        this.setState({ lastExercise: this.state.currentDay});
+        this.handleUpdateStreak();
+    }
+
+    handleUpdateStreak = () => {
+        if (this.state.currentDay === (this.state.lastExercise + 1)) {
+            this.setState({ streak: this.state.streak + 1});
+        }
     }
 
     render() {
@@ -147,11 +162,14 @@ export default class ProfilePage extends React.Component {
                             this.state.gender}</p>
                         
                     </div>
-                    <div className = "StreakButtonContainer">
+                    <div className = "DayCounter">
                         <Button onClick = {this.handleUpdateDay}>Current day: {this.state.currentDay}</Button>
                     </div>
                     <div className = "ExercisedToday">
                         <Button onClick = {this.handleExercisedToday}>Have I exercised today?: {this.state.exercisedToday}</Button>
+                    </div>
+                    <div className = "Streak">
+                        <p>Streak: {this.state.streak}</p>
                     </div>
                 </div>
                 : this.state.showFriends ?
