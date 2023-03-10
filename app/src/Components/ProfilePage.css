@@ -27,6 +27,16 @@
     /* margin: 10% */
 }
 
+.StreakButtonContainer{
+    text-align: center;
+    /* margin: 10% */
+}
+
+.ExercisedToday{
+    text-align: center;
+    /* margin: 10% */
+}
+
 .MyWorkoutsButton{
     width: 80%;
     height: 6vh;

@@ -30,7 +30,9 @@ export default class ProfilePage extends React.Component {
             userId: props.props.userId,
             editMode: false,
             showWorkouts: false,
-            showFriends: false
+            showFriends: false,
+            currentDay: 1,
+            exercisedToday: "No"
         }
     }
 
@@ -96,6 +98,14 @@ export default class ProfilePage extends React.Component {
         });
     }
 
+    handleUpdateDay = () => {
+        this.setState({ currentDay: this.state.currentDay + 1 });
+    }
+
+    handleExercisedToday = () => {
+        this.setState({ exercisedToday: "Yes" });
+    }
+
     render() {
         const {user} = this.state;
         return (
@@ -136,6 +146,12 @@ export default class ProfilePage extends React.Component {
                             :
                             this.state.gender}</p>
                         
+                    </div>
+                    <div className = "StreakButtonContainer">
+                        <Button onClick = {this.handleUpdateDay}>Current day: {this.state.currentDay}</Button>
+                    </div>
+                    <div className = "ExercisedToday">
+                        <Button onClick = {this.handleExercisedToday}>Have I exercised today?: {this.state.exercisedToday}</Button>
                     </div>
                 </div>
                 : this.state.showFriends ?
