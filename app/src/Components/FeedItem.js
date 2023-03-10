@@ -5,7 +5,7 @@ import Profilbilde from './Profilbilde.png'
 import Collapsible from "react-collapsible";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
+import CommentField from "./CommentField";
 
 
 export default class FeedItem extends React.Component {
@@ -17,7 +17,6 @@ export default class FeedItem extends React.Component {
             owner: props.props.sessionData.owner,
             exercises: props.props.sessionData.exercises,
             isCommenting: false,
-
         }
 
         console.log(props.props.sessionData);
@@ -30,7 +29,7 @@ export default class FeedItem extends React.Component {
 
 
     onComment(){
-        const newState = this.state.isCommenting;
+        let newState = !this.state.isCommenting;
         this.setState({
             isCommenting: newState,
         })
@@ -56,14 +55,15 @@ export default class FeedItem extends React.Component {
                         </ol>
                     </Collapsible>
                     <div>
-                        <Button onClick={this.onComment}>Comment</Button>
+                        <Button onClick={this.onComment.bind(this)}>Comments</Button>
                         <Button>Like</Button>
                     </div>
                     {this.state.isCommenting ?
-                    
-                    <TextField></TextField>
+
+                        <CommentField props={{session: this.state.name, email: this.state.owner}}/>
+
                     :
-                    <p></p>
+                    <div></div>
                     
                     }
                 </div>
