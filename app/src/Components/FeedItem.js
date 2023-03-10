@@ -6,6 +6,11 @@ import Collapsible from "react-collapsible";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CommentField from "./CommentField";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { getCurrentUser } from "./Auth";
+import handleAddLike from "../handles/handleAddLike";
+import handleGetLikes from "../handles/handleGetLikes";
+import handleRemoveLike from "../handles/handleRemoveLike";
 
 
 export default class FeedItem extends React.Component {
@@ -17,14 +22,43 @@ export default class FeedItem extends React.Component {
             owner: props.props.sessionData.owner,
             exercises: props.props.sessionData.exercises,
             isCommenting: false,
+            liked: false,
+            likes: 0
         }
 
         console.log(props.props.sessionData);
 
     }
 
-    onLike(){
+    componentDidMount(){
+        getCurrentUser().then((user)=>{
+            this.setState({
+                user: user.email
+            })
+            const likes = handleGetLikes(user.email, this.state.name, this.state.owner);
+            likes.then((l)=>{
+                this.setState({
+                    liked: l[0],
+                    likes: l[1].length
+                })
+            })
+        })
+    }
 
+    onLike(){
+        if(!this.state.liked){
+            handleAddLike(this.state.user, this.state.name, this.state.owner);
+            this.setState({
+                liked: true,
+                likes: this.state.likes+1
+            })
+        }else{
+            handleRemoveLike(this.state.user, this.state.name, this.state.owner);
+            this.setState({
+                liked: false,
+                likes: this.state.likes-1
+            })
+        }
     }
 
 
@@ -56,7 +90,17 @@ export default class FeedItem extends React.Component {
                     </Collapsible>
                     <div>
                         <Button onClick={this.onComment.bind(this)}>Comments</Button>
-                        <Button>Like</Button>
+                        <Button onClick={this.onLike.bind(this)}>
+                            {
+                                this.state.liked ?
+                                <FavoriteIcon sx="color:red"/>
+                                :
+                                <FavoriteIcon sx="color:grey"/>
+                            }
+                        </Button>
+                        {
+                            this.state.likes
+                        }
                     </div>
                     {this.state.isCommenting ?
 

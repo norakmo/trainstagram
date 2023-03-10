@@ -9,6 +9,7 @@ import handlePostComment from "../handles/handlePostComment";
 import { getCurrentUser } from "./Auth";
 
 
+
 export default class CommentField extends React.Component{
 
     constructor(props){
