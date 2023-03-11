@@ -15,6 +15,7 @@ import ExploreFeedPage from "./Components/ExploreFeedPage";
 import Programs from "./Components/ExerciseProgram";
 import AddProgram from "./Components/AddProgram";
 import Program from "./Components/Program";
+import WorkoutCreator from "./Components/WorkoutCreator";
 
 function App() {
   const dataRef = useRef();
@@ -44,10 +45,10 @@ function App() {
           }
         /> */}
         <Route
-          path="/Strength"
+          path="/WorkoutCreator"
           element={
             <div>
-              <Strength />
+              <WorkoutCreator />
               <MenuBar/>
             </div>
           }

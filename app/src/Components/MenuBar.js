@@ -33,7 +33,7 @@ export default class MenuBar extends React.Component {
                         const navBarMap = new Map();
                         navBarMap.set(0, "/Feed");
                         navBarMap.set(1, "/ExploreFeed");
-                        navBarMap.set(2, "/Strength");
+                        navBarMap.set(2, "/WorkoutCreator");
                         navBarMap.set(3, "/programs");
                         navBarMap.set(4, "/Profile");
                         value=newValue;
@@ -43,7 +43,7 @@ export default class MenuBar extends React.Component {
                 >
                     <BottomNavigationAction label="Feed" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-                    <BottomNavigationAction label="Session" icon={<SportsGymnasticsIcon />} />
+                    <BottomNavigationAction label="New Workout" icon={<SportsGymnasticsIcon />} />
                     <BottomNavigationAction label="Programs" icon={<AccountBoxIcon />} />
                     <BottomNavigationAction label="Profie" icon={<AccountBoxIcon />} />
                 </BottomNavigation>
