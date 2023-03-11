@@ -42,21 +42,21 @@ export default class WorkoutCreator extends React.Component {
 
     }
 
-    handleUpdateToAddWeight(c){
+    handleUpdateToAddWeight(c) {
         this.setState({
             toAddWeight: c.target.value
         })
 
     }
 
-    handleUpdateToAddReps(c){
+    handleUpdateToAddReps(c) {
         this.setState({
             toAddReps: c.target.value
         })
 
     }
 
-    handleUpdateToAddSets(c){
+    handleUpdateToAddSets(c) {
 
         this.setState({
             toAddSets: c.target.value
@@ -64,8 +64,8 @@ export default class WorkoutCreator extends React.Component {
 
     }
 
-    handleAddNewExercise(){
-        if(this.state.toAddExercise === "" || this.state.toAddWeight == null || this.state.toAddReps == null || this.state.toAddSets == null){
+    handleAddNewExercise() {
+        if (this.state.toAddExercise === "" || this.state.toAddWeight == null || this.state.toAddReps == null || this.state.toAddSets == null) {
             return;
         }
         let exercises = this.state.exercises;
@@ -83,15 +83,15 @@ export default class WorkoutCreator extends React.Component {
         document.getElementById("WorkoutCreator-inputSets").value = "";
     }
 
-    handleTitleChange(e){
+    handleTitleChange(e) {
         this.setState({
             title: e.target.value
         })
         console.log(this.state);
     }
 
-    handleSaveWorkout(){
-        if(this.state.exercises.length === 0 || this.state.title === ""){
+    handleSaveWorkout() {
+        if (this.state.exercises.length === 0 || this.state.title === "") {
             console.log("not enough info to workout");
             return;
         }
@@ -99,7 +99,7 @@ export default class WorkoutCreator extends React.Component {
         this.setState({
             addingState: true
         })
-        this.handlePostWorkout().then(()=>{
+        this.handlePostWorkout().then(() => {
             this.setState({
                 exercises: [],
                 toAddExercise: "",
@@ -113,12 +113,12 @@ export default class WorkoutCreator extends React.Component {
         })
     }
 
-    async handlePostWorkout(){
+    async handlePostWorkout() {
         const email = (await getCurrentUser()).email;
-        this.state.exercises.forEach(async (exer)=>{
+        this.state.exercises.forEach(async (exer) => {
             await handleStrengthExercise(email, exer[0], exer[1], exer[2], exer[3], this.state.title);
         })
-        
+
     }
 
 
@@ -153,10 +153,16 @@ export default class WorkoutCreator extends React.Component {
                                             value={this.state.toAddExercise}
                                             label="Age"
                                             onChange={this.handleChangeMovement.bind(this)}
-                                            
+
                                         >
                                             <MenuItem value={"Benk"}>Benk</MenuItem>
                                             <MenuItem value={"Markløft"}>Markløft</MenuItem>
+                                            <MenuItem value={"Squat"}>Squat</MenuItem>
+                                            <MenuItem value={"Benpress"}>Benpress</MenuItem>
+                                            <MenuItem value={"BicepCurl"}>BicepCurl</MenuItem>
+                                            <MenuItem value={"Squat"}>Squat</MenuItem>
+                                            <MenuItem value={"Squat"}>Squat</MenuItem>
+                                            <MenuItem value={"Squat"}>Squat</MenuItem>
                                             <MenuItem value={"Squat"}>Squat</MenuItem>
                                         </Select>
                                     </FormControl>
@@ -172,7 +178,7 @@ export default class WorkoutCreator extends React.Component {
                                 </TableCell>
                                 <TableCell>
                                     <Button onClick={this.handleAddNewExercise.bind(this)}>
-                                        <CheckIcon/>
+                                        <CheckIcon />
                                     </Button>
                                 </TableCell>
 
@@ -186,9 +192,9 @@ export default class WorkoutCreator extends React.Component {
                     <Button variant="contained" onClick={this.handleSaveWorkout.bind(this)}>Create workout</Button>
                     {
                         this.state.addingState ?
-                        <p>Loading...</p>
-                        :
-                        <div></div>
+                            <p>Loading...</p>
+                            :
+                            <div></div>
                     }
                 </div>
             </div>
