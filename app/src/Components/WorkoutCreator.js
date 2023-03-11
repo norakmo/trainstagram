@@ -11,6 +11,11 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import CheckIcon from '@mui/icons-material/Check';
+import "./WorkoutCreator.css";
+import handleStrengthExercise from "../handles/handleStrengthExercise";
+import { getCurrentUser } from "./Auth";
 
 
 
@@ -19,47 +24,108 @@ export default class WorkoutCreator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            exercises: [["Benk", 1, 2, 3], ["Markløft", 4, 5, 6]],
+            exercises: [],
             toAddExercise: "",
             toAddWeight: null,
             toAddReps: null,
-            toAddSets: null
+            toAddSets: null,
+            title: "",
+            addingState: false
         }
     }
 
 
-    handleChangeMovement() {
-    
+    handleChangeMovement(exer) {
+        this.setState({
+            toAddExercise: exer.target.value
+        })
+
     }
 
-    handleUpdateToAddWeight(e){
-        console.log(e);
+    handleUpdateToAddWeight(c){
         this.setState({
-            toAddWeigth: e.target.value
+            toAddWeight: c.target.value
+        })
+
+    }
+
+    handleUpdateToAddReps(c){
+        this.setState({
+            toAddReps: c.target.value
+        })
+
+    }
+
+    handleUpdateToAddSets(c){
+
+        this.setState({
+            toAddSets: c.target.value
+        })
+
+    }
+
+    handleAddNewExercise(){
+        if(this.state.toAddExercise === "" || this.state.toAddWeight == null || this.state.toAddReps == null || this.state.toAddSets == null){
+            return;
+        }
+        let exercises = this.state.exercises;
+        exercises.push([this.state.toAddExercise, this.state.toAddWeight, this.state.toAddReps, this.state.toAddSets]);
+        this.setState({
+            exercises: exercises,
+            toAddExercise: "",
+            toAddWeight: null,
+            toAddReps: null,
+            toAddSets: null
+        })
+
+        document.getElementById("WorkoutCreator-inputWeight").value = "";
+        document.getElementById("WorkoutCreator-inputReps").value = "";
+        document.getElementById("WorkoutCreator-inputSets").value = "";
+    }
+
+    handleTitleChange(e){
+        this.setState({
+            title: e.target.value
         })
         console.log(this.state);
     }
 
-    handleUpdateToAddReps(e){
+    handleSaveWorkout(){
+        if(this.state.exercises.length === 0 || this.state.title === ""){
+            console.log("not enough info to workout");
+            return;
+        }
+        console.log("adding workout....");
         this.setState({
-            toAddReps: e.target.value
+            addingState: true
         })
-        console.log(this.state);
+        this.handlePostWorkout().then(()=>{
+            this.setState({
+                exercises: [],
+                toAddExercise: "",
+                toAddWeight: null,
+                toAddReps: null,
+                toAddSets: null,
+                title: "",
+                addingState: false
+            })
+            console.log("Workout added")
+        })
     }
 
-    handleUpdateToAddSets(e){
-
-        this.setState({
-            toAddSets: e.target.value
+    async handlePostWorkout(){
+        const email = (await getCurrentUser()).email;
+        this.state.exercises.forEach(async (exer)=>{
+            await handleStrengthExercise(email, exer[0], exer[1], exer[2], exer[3], this.state.title);
         })
-        console.log(this.state);
+        
     }
 
 
     render() {
         return (
             <div>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} sx="margin: 20px;">
                     <Table>
                         <TableHead>
                             <TableCell>Øvelse</TableCell>
@@ -80,12 +146,14 @@ export default class WorkoutCreator extends React.Component {
                             }
 
                             <TableRow>
-                                <TableCell>
+                                <TableCell sx="width: 30%;">
                                     <FormControl fullWidth>
                                         <InputLabel>Øvelse</InputLabel>
                                         <Select
-                                            value={""}
+                                            value={this.state.toAddExercise}
                                             label="Age"
+                                            onChange={this.handleChangeMovement.bind(this)}
+                                            
                                         >
                                             <MenuItem value={"Benk"}>Benk</MenuItem>
                                             <MenuItem value={"Markløft"}>Markløft</MenuItem>
@@ -94,19 +162,35 @@ export default class WorkoutCreator extends React.Component {
                                     </FormControl>
                                 </TableCell>
                                 <TableCell>
-                                    <TextField onChange={this.handleUpdateToAddWeight.bind(this)} label="Vekt"></TextField>
+                                    <TextField onChange={this.handleUpdateToAddWeight.bind(this)} label="Vekt" id="WorkoutCreator-inputWeight"></TextField>
                                 </TableCell>
                                 <TableCell>
-                                    <TextField onChange={this.handleUpdateToAddReps.bind(this)} label="reps"></TextField>
+                                    <TextField onChange={this.handleUpdateToAddReps.bind(this)} label="reps" id="WorkoutCreator-inputReps"></TextField>
                                 </TableCell>
                                 <TableCell>
-                                    <TextField onChange={this.handleUpdateToAddSets.bind(this)} label="sets"></TextField>
+                                    <TextField onChange={this.handleUpdateToAddSets.bind(this)} label="sets" id="WorkoutCreator-inputSets"></TextField>
+                                </TableCell>
+                                <TableCell>
+                                    <Button onClick={this.handleAddNewExercise.bind(this)}>
+                                        <CheckIcon/>
+                                    </Button>
                                 </TableCell>
 
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <div className="completeWorkoutForm">
+                    <p>Name your workout:</p>
+                    <TextField onChange={this.handleTitleChange.bind(this)}></TextField>
+                    <Button variant="contained" onClick={this.handleSaveWorkout.bind(this)}>Create workout</Button>
+                    {
+                        this.state.addingState ?
+                        <p>Loading...</p>
+                        :
+                        <div></div>
+                    }
+                </div>
             </div>
         )
     }
