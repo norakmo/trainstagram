@@ -5,6 +5,7 @@ import FeedItem from './FeedItem';
 import { Card } from "@mui/material";
 import handleGetTrainingSessions from "../handles/handleGetTrainingSessions";
 import { getCurrentUser } from "./Auth";
+import GroupBar from "./GroupBar";
 
 export default class Feed extends React.Component{
     constructor(props){
@@ -34,8 +35,9 @@ export default class Feed extends React.Component{
 
     render(){
         return(
-            <div class="FeedContainer">
-                <div class="Feed">
+            <div className="Bar"> < GroupBar/> 
+                <div class="FeedContainer">
+                    <div class="Feed">
                         {
                         this.state.sessions === "empty" ?
                         <p>Loading</p>
@@ -44,7 +46,7 @@ export default class Feed extends React.Component{
                             <FeedItem props={{sessionData: session}}/>
                         ))
                         }
-    
+                    </div>
                 </div>
             </div>
         )

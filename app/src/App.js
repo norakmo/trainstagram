@@ -15,6 +15,7 @@ import ExploreFeedPage from "./Components/ExploreFeedPage";
 import Programs from "./Components/ExerciseProgram";
 import AddProgram from "./Components/AddProgram";
 import Program from "./Components/Program";
+import GroupBar from "./Components/GroupBar";
 
 function App() {
   const dataRef = useRef();
@@ -61,7 +62,15 @@ function App() {
             </div>
           }
         />
-        
+
+        <Route
+          path="/GroupBar"
+          element={
+            <div>
+              <GroupBar />
+            </div>
+          }
+        />
           
           <Route path="/Profile" element ={
             <div>
