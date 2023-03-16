@@ -27,20 +27,6 @@ function LogIn() {
       });
   }, []);
 
-  /*  const logInUser = (event) => {
-      event.preventDefault();
-      signInWithEmailAndPassword(auth, logInEmail, logInPassword)
-      .then((userCredential) => {
-        console.log(userCredential);
-        navigate("/Feed");
-      })
-      .catch((error) => {
-        console.log(error);
-        alert(error.message);
-      });
-    };
-    */
-
   const logInUser = async (event) => {
     event.preventDefault();
     updateStreak();
@@ -54,24 +40,6 @@ function LogIn() {
         alert(error.message);
       });
   };
-
-  /*   const updateStreak = (event) => {
-    const liste = [];
-    const d1 = new Date(); //i dag
-    const d2 = new Date(liste[0]); //sist logget inn
-    console.log("kommer vi hit?");
-    liste = handleGetStreak();
-    console.log(handleGetStreak());
-
-    if (liste.length == 0) {
-      handleStreak(logInEmail, d1, 5);
-    } else if (
-      d1.getDate() != d2.getDate() &&
-      d1.getTime() - d2.getTime() < 86400001
-    ) {
-      handleStreakUpdate(logInEmail, d1, liste[1] + 1);
-    } else handleStreakUpdate(logInEmail, d1, 0);
-  }; */
 
   const updateStreak = async (event) => {
     const d1 = new Date(); // today
