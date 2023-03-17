@@ -5,7 +5,6 @@ import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "./Auth";
-import handleStreak from "../handles/handleStreak";
 import handleStreakUpdate from "../handles/handleStreakUpdate";
 import handleGetStreak from "../handles/handleGetStreak";
 
