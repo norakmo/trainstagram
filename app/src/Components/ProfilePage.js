@@ -15,6 +15,7 @@ import handleUpdateProfile from "../handles/handleUpdateProfile";
 import { touchRippleClasses } from "@mui/material";
 import MyWorkouts from "./MyWorkouts";
 import FriendsList from "./FriendsList";
+import handleGetStreak from "../handles/handleGetStreak";
 
 export default class ProfilePage extends React.Component {
   constructor(props) {
@@ -29,11 +30,8 @@ export default class ProfilePage extends React.Component {
       editMode: false,
       showWorkouts: false,
       showFriends: false,
-      currentDay: 1,
-      exercisedToday: "No",
       streak: "empty",
       lastLoggedIn: "empty",
-      lastExercise: 0,
     };
   }
 
@@ -43,6 +41,7 @@ export default class ProfilePage extends React.Component {
         this.setState({ user });
         const promise = handleGetProfile(user.email, false);
         promise.then((data) => {
+          this.getStreak();
           this.setState({
             name: data.name,
             DateOfBirth: data.dateOfBirth,
@@ -99,24 +98,18 @@ export default class ProfilePage extends React.Component {
     });
   };
 
-  handleUpdateDay = () => {
-    this.setState({ currentDay: this.state.currentDay + 1 });
-    this.setState({ exercisedToday: "No" });
-    if (this.state.currentDay !== this.state.lastExercise) {
-      this.setState({ streak: 0 });
-      this.setState({ lastExercise: this.state.currentDay });
-    }
-  };
-
-  handleExercisedToday = () => {
-    this.setState({ exercisedToday: "Yes" });
-    this.setState({ lastExercise: this.state.currentDay });
-    this.handleUpdateStreak();
-  };
-
-  handleUpdateStreak = () => {
-    if (this.state.currentDay === this.state.lastExercise + 1) {
-      this.setState({ streak: this.state.streak + 1 });
+  getStreak = async () => {
+    try {
+      const user = await getCurrentUser();
+      if (user) {
+        const streakData = await handleGetStreak(user.email);
+        this.setState({
+          streak: streakData.streak,
+          lastLoggedIn: new Date(streakData.lastLoggedIn).toString(),
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -189,19 +182,28 @@ export default class ProfilePage extends React.Component {
                   this.state.gender
                 )}
               </p>
-            </div>
-            <div className="DayCounter">
-              <Button onClick={this.handleUpdateDay}>
-                Current day: {this.state.currentDay}
-              </Button>
-            </div>
-            <div className="ExercisedToday">
-              <Button onClick={this.handleExercisedToday}>
-                Have I exercised today?: {this.state.exercisedToday}
-              </Button>
-            </div>
-            <div className="Streak">
-              <p>Streak: {this.state.streak}</p>
+              <p>
+                Streak:{" "}
+                {this.state.editMode ? (
+                  <Textfield
+                    defaultValue={this.state.streak}
+                    id="genderTextField"
+                  />
+                ) : (
+                  this.state.streak
+                )}
+              </p>
+              <p>
+                Sist logget inn:{" "}
+                {this.state.editMode ? (
+                  <Textfield
+                    defaultValue={this.state.lastLoggedIn}
+                    id="genderTextField"
+                  />
+                ) : (
+                  this.state.lastLoggedIn
+                )}
+              </p>
             </div>
           </div>
         ) : this.state.showFriends ? (
