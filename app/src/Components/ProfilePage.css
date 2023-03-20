@@ -27,6 +27,21 @@
     /* margin: 10% */
 }
 
+.DayCounter{
+    text-align: center;
+    /* margin: 10% */
+}
+
+.ExercisedToday{
+    text-align: center;
+    /* margin: 10% */
+}
+
+.Streak{
+    text-align: center;
+    /* margin: 10% */
+}
+
 .MyWorkoutsButton{
     width: 80%;
     height: 6vh;
