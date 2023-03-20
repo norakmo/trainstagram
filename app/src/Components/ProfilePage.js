@@ -203,7 +203,11 @@ export default class ProfilePage extends React.Component {
                 ) : (
                   this.state.lastLoggedIn
                 )}
+                <br></br>
+                <br></br>
+                <br></br>
               </p>
+
             </div>
           </div>
         ) : this.state.showFriends ? (
