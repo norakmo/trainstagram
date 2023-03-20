@@ -7,6 +7,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FriendsList from "./FriendsList";
+import GroupBarElement from "./GroupBarElement";
 
 
 
@@ -15,24 +16,13 @@ export default class GroupBar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            groupsMap: new Map(),
+            groups: [],
             showFriends: false
         }; 
     }
 
 
-    async componentDidMount() {
-        const myUser = await getCurrentUser();
-        try {
-            if (myUser) {
-                const groupsMap = await handleGroupBar(myUser);
-                this.setState({ groupsMap });
-            }
-            
-        } catch (error) {
-            console.log(error);
-        }        
-    }
+
 
     handleShowFriends = () => {
         this.setState({
@@ -44,15 +34,11 @@ export default class GroupBar extends React.Component{
 
         let value = "Feed";
 
-        const {groupsMap} = this.state;
-        
-        const groups = Array.from(groupsMap.entries());
-
-
     return(
             <div class="GroupBarContainer">
                 <div class="GroupBar">
-        
+                    
+                    
                     <BottomNavigation class ="nav"
                         showLabels
                         value={value}
@@ -64,16 +50,9 @@ export default class GroupBar extends React.Component{
                             console.log(newValue);
                         }}
                     >
-                        <BottomNavigationAction label="New group" icon={
-                            <AddCircleOutlineIcon class ="Icon"/>} onClick={this.handleShowFriends}/>
+                    <BottomNavigationAction label="New group" icon={
+                        <AddCircleOutlineIcon class ="Icon"/>} onClick={this.handleShowFriends}/>
                     </BottomNavigation>
-                    {groups.map(([groupName, members], index) => (
-                        <Collapsible key={index} className="GroupInGroupBar" trigger={
-                            <div className="GroupName">{groupName}</div>}>
-                            {members.map((member, i) => (
-                            <div className="MembersInGroup" key={i}> {member.Email} </div>))}
-                        </Collapsible>
-                    ))}
                 </div>
             </div>
         );
