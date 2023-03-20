@@ -58,7 +58,7 @@ export default class GroupBar extends React.Component{
                         value={value}
                         onChange={(event, newValue) => {
                             const navBarMap = new Map();
-                            navBarMap.set(0, "/Profile");
+                            navBarMap.set(0, "/newgroup");
                             value=newValue;
                             window.location.href = navBarMap.get(newValue);
                             console.log(newValue);

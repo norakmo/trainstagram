@@ -2,7 +2,10 @@ import { db } from "../firebase_setup/firebase";
 import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase_setup/firebase";
 
-async function handleAddGroup(groupName, params, user) {
+async function handleAddGroup(groupName, members, user) {
+    console.log(groupName);
+    console.log(members);
+    console.log(user);
     const groupsRef = collection(db, "Groups");
     const groupsSnapshot = await getDocs(groupsRef);
     const groupData = groupsSnapshot.docs.map(doc => doc.data());
@@ -12,10 +15,10 @@ async function handleAddGroup(groupName, params, user) {
             GroupName: groupName,
             Admin: user
         });
-        params.forEach(async (element) => {
+        members.forEach(async (membersEmail) => {
             const membersRef = collection(db, "Groups/" + newGroupRef.id + "/Members");
             await addDoc(membersRef, {
-                Email: element.email
+                Email: membersEmail
             });
         });
     }

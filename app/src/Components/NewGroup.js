@@ -8,6 +8,10 @@ import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import "./FriendList.css";
 import handleUpdateFriends from "../handles/handleUpdateFriends";
+import { getCurrentUser } from "./Auth";
+import CheckIcon from '@mui/icons-material/Check';
+import AddFriendToGroupCard from "./AddFriendToGroupCard";
+import handleAddGroup from "../handles/handleAddGroup";
 
 
 
@@ -15,23 +19,83 @@ export default class NewGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: props.props.email,
+      email: null,
       friends: "Empty",
+      members: [],
+      groupName: null,
+      groupOwner: null,
+
     };
-    this.getFriendList();
+  }
+
+
+  componentDidMount(){
+    getCurrentUser().then((user)=>{
+      
+      this.setState({
+        email: user.email,
+      }, ()=>{
+        console.log(this.state.email);
+        this.getFriendList();
+      })
+      
+      
+    })
   }
 
 
   getFriendList() {
     const getFriends = handleGetFriends(this.state.email);
-              this.setState({
-                friends: "Empty",
-              });
-              getFriends.then((friends) => {
-                this.setState({
-                  friends: friends,
-                });
-              });     
+    this.setState({
+      friends: "Empty",
+    });
+    getFriends.then((friends) => {
+      this.setState({
+        friends: friends,
+      });
+      console.log(this.state.friends);
+    });
+  }
+
+  handleAdd(memberEmail){
+    let members = this.state.members;
+    if(!(members.includes(memberEmail))){
+      members.push(memberEmail)
+    }
+    this.setState({
+      members: members
+    }, ()=>{
+      console.log(this.state.members);
+    })
+  }
+
+  handleRemove(memberEmail){
+    let members = this.state.members;
+    if(members.includes(memberEmail)){
+      const i = members.indexOf(memberEmail);
+      if (i !== -1) {
+        members.splice(i, 1);
+      }
+    }
+    this.setState({
+      members: members
+    }, ()=>{
+      console.log(this.state.members);
+    })
+  }
+
+  completeGroup(){
+    console.log(this.state.groupName, this.state.members, this.state.email)
+    let addGroupPromise = handleAddGroup(this.state.groupName, this.state.members, this.state.email);
+    addGroupPromise.then(()=>{
+      window.location.href = "/Feed";
+    })
+  }
+
+  onUpdateGroupName(e){
+    this.setState({
+      groupName: e.target.value
+    })
   }
 
   render() {
@@ -41,39 +105,17 @@ export default class NewGroup extends React.Component {
         <p>Loading</p>
       ) : (
         this.state.friends.map((friend) => (
-          <FriendCard
-            props={{ data: friend, remove: this.handleRemoveFriend }}
+          <AddFriendToGroupCard
+            props={{ data: friend, add: this.handleAdd, parent: this }}
           />
         ))
       )}
-      {this.state.addFriendState ? (
-        <Card sx="margin: 5px; padding: 5px;">
-          <form onSubmit={this.handleAddFriendComplete}>
-            <TextField
-              sx="width: 80%;"
-              helperText="email of friend to add"
-              id="emailOfNewFriend"
-              onChange={(e) => {
-                this.setState({
-                  emailToAdd: e.target.value,
-                });
-              }}
-            />
-            <Fab color="primary" aria-label="add" type="submit">
-              <AddIcon />
-            </Fab>
-          </form>
-        </Card>
-      ) : (
-        <Fab
-          color="primary"
-          aria-label="add"
-          onClick={this.handleAddFriend}
-          sx="margin: 5px;"
-        >
-          <AddIcon />
-        </Fab>
-      )}
+      <TextField label="Group Name" onChange={this.onUpdateGroupName.bind(this)}></TextField>
+      <Fab
+        onClick={this.completeGroup.bind(this)}
+      >
+        Done
+      </Fab>
     </List>
   );
   }

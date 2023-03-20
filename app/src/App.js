@@ -56,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/Friends"
+          path="/NewGroup"
           element={
             <div>
               <NewGroup />
