@@ -103,9 +103,17 @@ export default class ProfilePage extends React.Component {
       const user = await getCurrentUser();
       if (user) {
         const streakData = await handleGetStreak(user.email);
+        const date = new Date(streakData.lastLoggedIn);
+        const date2 =
+          "" +
+          date.getDate() +
+          "." +
+          (date.getMonth() + 1) +
+          "." +
+          date.getFullYear();
         this.setState({
           streak: streakData.streak,
-          lastLoggedIn: new Date(streakData.lastLoggedIn).toString(),
+          lastLoggedIn: date2,
         });
       }
     } catch (error) {
@@ -203,11 +211,7 @@ export default class ProfilePage extends React.Component {
                 ) : (
                   this.state.lastLoggedIn
                 )}
-                <br></br>
-                <br></br>
-                <br></br>
               </p>
-
             </div>
           </div>
         ) : this.state.showFriends ? (
