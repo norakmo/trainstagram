@@ -16,6 +16,8 @@ import Programs from "./Components/ExerciseProgram";
 import AddProgram from "./Components/AddProgram";
 import Program from "./Components/Program";
 import GroupBar from "./Components/GroupBar";
+// import FriendsList from "./Components/FriendsList";
+import NewGroup from "./Components/NewGroup";
 
 function App() {
   const dataRef = useRef();
@@ -50,6 +52,14 @@ function App() {
             <div>
               <Strength />
               <MenuBar/>
+            </div>
+          }
+        />
+        <Route
+          path="/Friends"
+          element={
+            <div>
+              <NewGroup />
             </div>
           }
         />

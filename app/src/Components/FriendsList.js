@@ -13,7 +13,7 @@ export default class FriendsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: props.props.email,
+     email: props.props.email,
       friends: "Empty",
       addFriendState: false,
     };
@@ -54,18 +54,17 @@ export default class FriendsList extends React.Component {
   getFriendList() {
     //console.log("getting friends of user: " + this.state.email);
     const getFriends = handleGetFriends(this.state.email);
-    this.setState({
-      friends: "Empty",
-    });
-    getFriends.then((friends) => {
-      this.setState({
-        friends: friends,
-      });
-    });
+              this.setState({
+                friends: "Empty",
+              });
+              getFriends.then((friends) => {
+                this.setState({
+                  friends: friends,
+                });
+              });     
   }
 
   render() {
-    console.log(this.state.friends);
     return (
       <List sx="margin-top: 25px;">
         {this.state.friends === "Empty" ? (
