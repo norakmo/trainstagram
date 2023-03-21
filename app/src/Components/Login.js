@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase_setup/firebase";
 import "./Login_Register.css";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "./Auth";
+import handleStreakUpdate from "../handles/handleStreakUpdate";
+import handleGetStreak from "../handles/handleGetStreak";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
   const [logInPassword, setLogInPassword] = useState("");
   const [user, setUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [date, setDate] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +26,9 @@ function LogIn() {
       });
   }, []);
 
-  const logInUser = (event) => {
+  const logInUser = async (event) => {
     event.preventDefault();
+    updateStreak();
     signInWithEmailAndPassword(auth, logInEmail, logInPassword)
       .then((userCredential) => {
         console.log(userCredential);
@@ -38,6 +38,24 @@ function LogIn() {
         console.log(error);
         alert(error.message);
       });
+  };
+
+  const updateStreak = async (event) => {
+    const d1 = new Date(); // today
+    const streakData = await handleGetStreak(logInEmail);
+    const d2 = new Date(streakData.lastLoggedIn);
+
+    console.log(d1.getTime() - d2.getTime() + "hva får jeg her?");
+    if (d1.getDate() === d2.getDate()) {
+      handleStreakUpdate(logInEmail, d1.getTime(), streakData.streak);
+    } else if (
+      d1.getDate() !== d2.getDate() &&
+      d1.getTime() - d2.getTime() < 86400001
+    ) {
+      handleStreakUpdate(logInEmail, d1.getTime(), streakData.streak + 1);
+    } else {
+      handleStreakUpdate(logInEmail, d1.getTime(), 0);
+    }
   };
 
   return (
