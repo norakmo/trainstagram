@@ -197,10 +197,13 @@ export default class ProfilePage extends React.Component {
                     defaultValue={this.state.streak}
                     id="genderTextField"
                   />
-                ) : (
+                ) : this.state.streak === 0 ? (
                   this.state.streak
+                ) : (
+                  `${this.state.streak}🔥`
                 )}
               </p>
+
               <p>
                 Sist logget inn:{" "}
                 {this.state.editMode ? (
