@@ -8,20 +8,31 @@ import { getCurrentUser } from "../Components/Auth";
 
 
 
-async function handleGroupBar(user) {
-    console.log(user.email + "her er vi nå");
-    const groupsRef = collection(db, "Groups");
+async function handleGroupBar(email) {
+
+
+    const groupsRef = collection(firestore, "Groups");
     const groupsSnapshot = await getDocs(groupsRef);
-    const groupsData = new Map();
+
+
+    const groupsData = [];
+
+
     for (const groupDoc of groupsSnapshot.docs) {
-        const membersRef = collection(db,"Groups/" + groupDoc.id + "/Members");
+        
+        const membersRef = collection(firestore,"Groups/" + groupDoc.id + "/Members");
         const membersSnapshot = await getDocs(membersRef);
+
         const membersData = membersSnapshot.docs.map(doc => doc.data());
-        const containsUser = membersData.some(member => member.Email === user.email);
-        if (containsUser){
-            groupsData.set(groupDoc.get("GroupName"), membersData);
+        
+        
+        if (membersData.some(member => member.Email === email)){
+            
+            groupsData.push([groupDoc.get("GroupName"), membersData, groupDoc.get("Admin")]);
         }
+        
     }
+    console.log(groupsData);
     return groupsData;
   } 
 

@@ -3,9 +3,9 @@ import { collection, getDocs, addDoc, setDoc, doc } from "firebase/firestore";
 import { firestore } from "../firebase_setup/firebase";
 
 async function handleAddGroup(groupName, members, user) {
-    console.log(groupName);
+    
     console.log(members);
-    console.log(user);
+
     const groupsRef = collection(db, "Groups");
     const groupsSnapshot = await getDocs(groupsRef);
     const groupData = groupsSnapshot.docs.map(doc => doc.data());

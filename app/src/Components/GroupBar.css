@@ -46,3 +46,7 @@
 }
 
 
+.groupIconContainer{
+  display: flex;
+  flex-direction: column;
+}

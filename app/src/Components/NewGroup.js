@@ -32,7 +32,9 @@ export default class NewGroup extends React.Component {
   componentDidMount(){
     getCurrentUser().then((user)=>{
       let members = this.state.members;
-      members.push(user.email);
+      if(!members.includes(user.email)){
+        members.push(user.email);
+      }
       this.setState({
         email: user.email,
         members: members,

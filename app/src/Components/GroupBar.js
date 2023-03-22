@@ -8,30 +8,46 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FriendsList from "./FriendsList";
 import GroupBarElement from "./GroupBarElement";
+import GroupIcon from '@mui/icons-material/Group';
 
 
 
 export default class GroupBar extends React.Component{
 
+    
     constructor(props) {
         super(props);
         this.state = {
-            groups: [],
-            showFriends: false
+            groups: null,
+            showFriends: false,
+            parent: props.props.parent
         }; 
+        
     }
 
 
 
+    getGroup(name, admin){
+        console.log("getgroup")
+        this.state.parent.loadGroup(name, admin);
+    }
 
-    handleShowFriends = () => {
-        this.setState({
-            showFriends: !this.state.showFriends,
-        });
+    handleNewGroup(){
+        window.location.href = "/newGroup";
+    }
+
+    componentDidMount(){
+        getCurrentUser().then((user)=>{
+            handleGroupBar(user.email).then((groups)=>{
+                this.setState({
+                    groups: groups,
+                })
+            })
+        })
     }
 
     render() {
-
+        
         let value = "Feed";
 
     return(
@@ -39,7 +55,8 @@ export default class GroupBar extends React.Component{
                 <div class="GroupBar">
                     
                     
-                    <BottomNavigation class ="nav"
+                    
+                    {/* <BottomNavigation class ="nav"
                         showLabels
                         value={value}
                         onChange={(event, newValue) => {
@@ -52,7 +69,25 @@ export default class GroupBar extends React.Component{
                     >
                     <BottomNavigationAction label="New group" icon={
                         <AddCircleOutlineIcon class ="Icon"/>} onClick={this.handleShowFriends}/>
-                    </BottomNavigation>
+                    </BottomNavigation> */}
+
+                    <fab onClick={this.handleNewGroup} label="new group">
+                        <AddCircleOutlineIcon class ="Icon"/>
+                        
+                    </fab>
+                    {
+                        this.state.groups == null ?
+                        <div/>
+                        :
+                        this.state.groups.map((group)=>(
+                            <fab onClick={()=>{this.getGroup(group[0], group[1])}}>
+                                <div className="groupIconContainer">
+                                    <GroupIcon class="Icon"></GroupIcon>
+                                    <div>{group[0]}</div>
+                                </div>
+                            </fab>
+                        ))
+                    }
                 </div>
             </div>
         );

@@ -6,6 +6,7 @@ import { Card } from "@mui/material";
 import handleGetTrainingSessions from "../handles/handleGetTrainingSessions";
 import { getCurrentUser } from "./Auth";
 import GroupBar from "./GroupBar";
+import handleGetSessionInGroup from "../handles/handleGetSessionInGroup"
 
 export default class Feed extends React.Component{
     constructor(props){
@@ -15,7 +16,7 @@ export default class Feed extends React.Component{
             sessions: "empty"
         }
     }
-
+    
     componentDidMount(){
         getCurrentUser().then((user)=>{
             const TrainingSessions = handleGetTrainingSessions(user.email);
@@ -33,9 +34,26 @@ export default class Feed extends React.Component{
         })
     }
 
+    loadGroup(name, admin){
+        this.setState({
+            sessions: "empty"
+        },()=>{
+            handleGetSessionInGroup(name).then((sessions)=>{
+            
+                this.setState({
+                    sessions: sessions
+                },()=>{
+                    console.log(this.state.sessions);
+                })
+            })
+        })
+        
+    }
+    
+
     render(){
         return(
-            <div className="Bar"> < GroupBar/> 
+            <div className="Bar"> < GroupBar props={{parent: this}}/> 
                 <div class="FeedContainer">
                     <div class="Feed">
                         {
