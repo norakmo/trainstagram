@@ -22,34 +22,28 @@ export default class MenuBar extends React.Component {
                             <th class="MenuItem"><a class="MenuItemButton" href="./Profile"><AccountBoxIcon sx="font-size: 300%;"/></a></th>
                         </tr>
                     </table> */}
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            const navBarMap = new Map();
-            navBarMap.set(0, "/Feed");
-            navBarMap.set(1, "/ExploreFeed");
-            navBarMap.set(2, "/Strength");
-            navBarMap.set(3, "/programs");
-            navBarMap.set(4, "/Profile");
-            value = newValue;
-            window.location.href = navBarMap.get(newValue);
-            console.log(newValue);
-          }}
-        >
-          <BottomNavigationAction label="Feed" icon={<HomeIcon />} />
-          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-          <BottomNavigationAction
-            label="Session"
-            icon={<SportsGymnasticsIcon />}
-          />
-          <BottomNavigationAction
-            label="Programs"
-            icon={<CalendarMonthIcon />}
-          />
-          <BottomNavigationAction label="Profie" icon={<AccountBoxIcon />} />
-        </BottomNavigation>
-      </div>
-    );
-  }
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        const navBarMap = new Map();
+                        navBarMap.set(0, "/Feed");
+                        navBarMap.set(1, "/ExploreFeed");
+                        navBarMap.set(2, "/WorkoutCreator");
+                        navBarMap.set(3, "/programs");
+                        navBarMap.set(4, "/Profile");
+                        value=newValue;
+                        window.location.href = navBarMap.get(newValue);
+                        console.log(newValue);
+                    }}
+                >
+                    <BottomNavigationAction label="Feed" icon={<HomeIcon />} />
+                    <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+                    <BottomNavigationAction label="New Workout" icon={<SportsGymnasticsIcon />} />
+                    <BottomNavigationAction label="Programs" icon={<AccountBoxIcon />} />
+                    <BottomNavigationAction label="Profie" icon={<AccountBoxIcon />} />
+                </BottomNavigation>
+            </div>
+        )
+    }
 }
