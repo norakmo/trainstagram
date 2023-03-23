@@ -105,11 +105,6 @@ export default class GroupBar extends React.Component {
             ))
           )}
         </div>
-        <div>
-          {/* Use the feed prop to render the component */}
-          {this.props.feed ? <p>Feed is true</p> : <p>Feed is false</p>}
-          <button onClick={this.handleFeed}>Set feed state to true</button>
-        </div>
       </div>
     );
   }

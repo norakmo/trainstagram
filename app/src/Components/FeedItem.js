@@ -28,7 +28,8 @@ export default class FeedItem extends React.Component {
       isCommenting: false,
       liked: false,
       likes: 0,
-      feed: true,
+      isAdmin: props.props.isAdmin,
+      parent: props.props.parent
     };
 
     console.log(props.props.sessionData);
@@ -73,17 +74,8 @@ export default class FeedItem extends React.Component {
     }
   }
 
-  async removeSession() {
-    try {
-      const user = await getCurrentUser();
-      if (user) {
-        const isAdmin = handleGetAdmin(user);
-        handleRemoveSessionFromGroup(isAdmin, user.email, "Kjørda", "tungt");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    
+  removeSession() {
+    this.state.parent.handleRemoveSession(this.state.owner, this.state.name);
   }
 
   onComment() {
@@ -136,8 +128,8 @@ export default class FeedItem extends React.Component {
           )}
         </div>
         <div className="friendCardDeleteButtonContainer">
-          {this.state.feed && (
-            <Fab onClick={() => this.removeSession()}>
+          {this.state.isAdmin && (
+            <Fab onClick={this.removeSession.bind(this)}>
               <DeleteIcon
                 sx={{ color: "black", float: "right", right: "0px" }}
               />

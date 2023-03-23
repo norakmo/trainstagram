@@ -7,6 +7,7 @@ import handleGetTrainingSessions from "../handles/handleGetTrainingSessions";
 import { getCurrentUser } from "./Auth";
 import GroupBar from "./GroupBar";
 import handleGetSessionInGroup from "../handles/handleGetSessionInGroup";
+import handleRemoveSessionFromGroup from "../handles/handleRemoveSessionFromGroup";
 
 export default class Feed extends React.Component {
   constructor(props) {
@@ -14,6 +15,9 @@ export default class Feed extends React.Component {
 
     this.state = {
       sessions: "empty",
+      isAdmin: false,
+      user: null,
+      group: null
     };
   }
 
@@ -24,6 +28,8 @@ export default class Feed extends React.Component {
   loadFriendSessions() {
     this.setState({
       sessions: "empty",
+      isAdmin: false,
+      group: null
     });
 
     getCurrentUser().then((user) => {
@@ -33,6 +39,7 @@ export default class Feed extends React.Component {
         this.setState(
           {
             sessions: Sessions,
+            user: user.email
           },
           () => {
             console.log(this.state.sessions);
@@ -43,9 +50,14 @@ export default class Feed extends React.Component {
   }
 
   loadGroup(name, admin) {
+
+    console.log(admin[0]);
+    console.log(this.state.user);
     this.setState(
       {
         sessions: "empty",
+        isAdmin: admin[0].Email === this.state.user,
+        group: name
       },
       () => {
         handleGetSessionInGroup(name).then((sessions) => {
@@ -55,11 +67,16 @@ export default class Feed extends React.Component {
             },
             () => {
               console.log(this.state.sessions);
+              console.log(this.state.isAdmin)
             }
           );
         });
       }
     );
+  }
+
+  handleRemoveSession(sessionOwner, session){
+    handleRemoveSessionFromGroup(sessionOwner, this.state.group, session);
   }
 
   render() {
@@ -73,7 +90,7 @@ export default class Feed extends React.Component {
               <p>Loading</p>
             ) : (
               this.state.sessions.map((session) => (
-                <FeedItem props={{ sessionData: session }} />
+                <FeedItem props={{ sessionData: session , isAdmin:this.state.isAdmin, parent: this}} />
               ))
             )}
           </div>
