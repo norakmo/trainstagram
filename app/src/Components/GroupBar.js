@@ -15,6 +15,7 @@ import FeedItem from "./FeedItem";
 export default class GroupBar extends React.Component {
   constructor(props) {
     super(props);
+    this.handleFeed = this.handleFeed.bind(this);
     this.state = {
       groups: null,
       showFriends: false,
@@ -41,6 +42,11 @@ export default class GroupBar extends React.Component {
       this.state.parent.loadGroup(name, admin);
       document.getElementById(name).style.color = "white";
     }
+  }
+
+  handleFeed() {
+    // Access the setFeedState function passed down from the parent component and update the feed state
+    this.props.setFeedState(true);
   }
 
   handleNewGroup() {
@@ -98,6 +104,11 @@ export default class GroupBar extends React.Component {
               </fab>
             ))
           )}
+        </div>
+        <div>
+          {/* Use the feed prop to render the component */}
+          {this.props.feed ? <p>Feed is true</p> : <p>Feed is false</p>}
+          <button onClick={this.handleFeed}>Set feed state to true</button>
         </div>
       </div>
     );

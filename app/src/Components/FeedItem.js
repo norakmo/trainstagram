@@ -13,10 +13,14 @@ import handleGetLikes from "../handles/handleGetLikes";
 import handleRemoveLike from "../handles/handleRemoveLike";
 import Fab from "@mui/material/Fab";
 import DeleteIcon from "@mui/icons-material/Delete";
+import handleGetAdmin from "../handles/handleGetAdmin";
+import handleRemoveSessionFromGroup from "../handles/handleRemoveSessionFromGroup";
+import GroupBar from "./GroupBar";
 
 export default class FeedItem extends React.Component {
   constructor(props) {
     super(props);
+    this.setFeedState = this.setFeedState.bind(this);
     this.state = {
       name: props.props.sessionData.name,
       owner: props.props.sessionData.owner,
@@ -28,6 +32,10 @@ export default class FeedItem extends React.Component {
     };
 
     console.log(props.props.sessionData);
+  }
+
+  setFeedState(value) {
+    this.setState({ feed: value });
   }
 
   componentDidMount() {
@@ -65,6 +73,13 @@ export default class FeedItem extends React.Component {
     }
   }
 
+  removeSession() {
+    const user = getCurrentUser();
+    console.log(user);
+    const isAdmin = handleGetAdmin(user);
+    handleRemoveSessionFromGroup(isAdmin, user, "Bestevenn", "hei");
+  }
+
   onComment() {
     let newState = !this.state.isCommenting;
     this.setState({
@@ -73,12 +88,6 @@ export default class FeedItem extends React.Component {
   }
 
   setStateWhenGroup(state) {
-    this.setState({
-      feed: state,
-    });
-  }
-
-  removeSession(state) {
     this.setState({
       feed: state,
     });
@@ -122,13 +131,14 @@ export default class FeedItem extends React.Component {
         </div>
         <div className="friendCardDeleteButtonContainer">
           {this.state.feed && (
-            <Fab onClick={() => this.state.removeSession(this.state.Session)}>
+            <Fab onClick={() => this.removeSession()}>
               <DeleteIcon
                 sx={{ color: "black", float: "right", right: "0px" }}
               />
             </Fab>
           )}
         </div>
+        {/* <GroupBar setFeedState={this.setFeedState} /> */}
       </div>
     );
   }
