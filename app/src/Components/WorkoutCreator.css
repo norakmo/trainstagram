@@ -1,5 +1,14 @@
 .completeWorkoutForm{
     margin-left: 20px;
     display: flex;
-    flex-direction: right;
+    flex-direction: row;
+}
+
+.groupListItem{
+    display: flex;
+    flex-direction: row;
+}
+
+.groupList{
+    list-style-type: none;
 }

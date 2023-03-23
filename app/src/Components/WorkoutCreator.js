@@ -16,6 +16,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import "./WorkoutCreator.css";
 import handleStrengthExercise from "../handles/handleStrengthExercise";
 import { getCurrentUser } from "./Auth";
+import { Checkbox } from "@mui/material";
+import handleGroupBar from "../handles/handleGroupBar";
+import handleAddSessionToGroup from "../handles/handleAddSessionToGroup";
 
 
 
@@ -30,8 +33,23 @@ export default class WorkoutCreator extends React.Component {
             toAddReps: null,
             toAddSets: null,
             title: "",
-            addingState: false
+            addingState: false,
+            groups: null,
+            shareToGroup: []
         }
+    }
+
+
+    componentDidMount(){
+        getCurrentUser().then((user)=>{
+            handleGroupBar(user.email).then((groups)=>{
+                this.setState({
+                    groups: groups
+                },()=>{
+                    console.log(this.state.groups)
+                })
+            })
+        })
     }
 
 
@@ -113,10 +131,34 @@ export default class WorkoutCreator extends React.Component {
         })
     }
 
+    handeAddSessionToGroup(group, e){
+        console.log(e.target.checked);
+        let groupToShareTo = this.state.shareToGroup;
+        let newGroupToShareTo = [];
+        if(e.target.checked === true){
+            newGroupToShareTo = groupToShareTo;
+            newGroupToShareTo.push(group);
+        }else{
+            newGroupToShareTo = groupToShareTo.filter(function(s){
+                return s[0] !== group[0]
+            });
+        }
+
+        this.setState({
+            shareToGroup: newGroupToShareTo
+        },()=>{
+            console.log(this.state.shareToGroup);
+        })
+    }
+
     async handlePostWorkout() {
         const email = (await getCurrentUser()).email;
         this.state.exercises.forEach(async (exer) => {
             await handleStrengthExercise(email, exer[0], exer[1], exer[2], exer[3], this.state.title);
+        })
+
+        this.state.shareToGroup.forEach(async(group)=>{
+            await handleAddSessionToGroup(group[0], this.state.title, email)
         })
 
     }
@@ -190,6 +232,7 @@ export default class WorkoutCreator extends React.Component {
                     <p>Name your workout:</p>
                     <TextField onChange={this.handleTitleChange.bind(this)}></TextField>
                     <Button variant="contained" onClick={this.handleSaveWorkout.bind(this)}>Create workout</Button>
+                    
                     {
                         this.state.addingState ?
                             <p>Loading...</p>
@@ -197,6 +240,22 @@ export default class WorkoutCreator extends React.Component {
                             <div></div>
                     }
                 </div>
+                <ul className="groupList">
+                    {
+                        this.state.groups == null ?
+                        <p>Loading groups...</p>
+                        :
+                        this.state.groups.map((group)=>(
+                            <li>
+                                <div className="groupListItem">
+                                    <p>{group[0]}</p>
+                                    <Checkbox onChange={(e)=>{this.handeAddSessionToGroup([group[0]], e)}}/>
+                                </div>
+                            </li>
+                        ))
+                    }
+                    
+                </ul>
             </div>
         )
     }
