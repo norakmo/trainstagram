@@ -4,7 +4,7 @@ import { firestore } from "../firebase_setup/firebase";
 
 async function handleAddGroup(groupName, members, user) {
     
-    console.log(members);
+    console.log("members to add to group:" + members);
 
     const groupsRef = collection(db, "Groups");
     const groupsSnapshot = await getDocs(groupsRef);
@@ -15,11 +15,12 @@ async function handleAddGroup(groupName, members, user) {
             GroupName: groupName,
             Admin: user
         });
-        members.forEach(async (membersEmail) => {
+        await members.forEach(async (membersEmail) => {
             const membersRef = collection(db, "Groups/" + newGroupRef.id + "/Members");
             await addDoc(membersRef, {
                 Email: membersEmail
             });
+            console.log("adding member: " + membersEmail);
         });
     }
 }

@@ -57,7 +57,8 @@ export default class Feed extends React.Component {
       {
         sessions: "empty",
         isAdmin: admin[0].Email === this.state.user,
-        group: name
+        group: name,
+        admin: admin
       },
       () => {
         handleGetSessionInGroup(name).then((sessions) => {
@@ -76,7 +77,9 @@ export default class Feed extends React.Component {
   }
 
   handleRemoveSession(sessionOwner, session){
-    handleRemoveSessionFromGroup(sessionOwner, this.state.group, session);
+    handleRemoveSessionFromGroup(sessionOwner, this.state.group, session).then(()=>{
+      this.loadGroup(this.state.group, this.state.admin);
+    })
   }
 
   render() {
