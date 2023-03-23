@@ -92,7 +92,7 @@ export default class NewGroup extends React.Component {
     console.log(this.state.groupName, this.state.members, this.state.email)
     let addGroupPromise = handleAddGroup(this.state.groupName, this.state.members, this.state.email);
     addGroupPromise.then(()=>{
-      //window.location.href = "/Feed";
+      window.location.href = "/Feed";
     })
   }
 
