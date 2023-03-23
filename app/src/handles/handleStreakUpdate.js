@@ -10,7 +10,6 @@ import {
 import { firestore } from "../firebase_setup/firebase";
 
 async function handleStreakUpdate(userEmail, date, streak) {
-  console.log(userEmail + date + streak + "Nå er vi i streakupdate");
   const querySnapshot = await getDocs(
     query(
       collection(firestore, "StreakData"),

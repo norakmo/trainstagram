@@ -15,6 +15,9 @@ import ExploreFeedPage from "./Components/ExploreFeedPage";
 import Programs from "./Components/ExerciseProgram";
 import AddProgram from "./Components/AddProgram";
 import Program from "./Components/Program";
+import GroupBar from "./Components/GroupBar";
+// import FriendsList from "./Components/FriendsList";
+import NewGroup from "./Components/NewGroup";
 import WorkoutCreator from "./Components/WorkoutCreator";
 
 function App() {
@@ -54,6 +57,14 @@ function App() {
           }
         />
         <Route
+          path="/NewGroup"
+          element={
+            <div>
+              <NewGroup />
+            </div>
+          }
+        />
+        <Route
           path="/ExploreFeed"
           element={
             <div>
@@ -62,7 +73,15 @@ function App() {
             </div>
           }
         />
-        
+
+        <Route
+          path="/GroupBar"
+          element={
+            <div>
+              <GroupBar />
+            </div>
+          }
+        />
           
           <Route path="/Profile" element ={
             <div>

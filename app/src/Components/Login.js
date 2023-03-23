@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "./Auth";
 import handleStreakUpdate from "../handles/handleStreakUpdate";
 import handleGetStreak from "../handles/handleGetStreak";
+import handleAddSessionToGroup from "../handles/handleAddSessionToGroup";
+import handleGetSessionInGroup from "../handles/handleGetSessionInGroup";
 
 function LogIn() {
   const [logInEmail, setLogInEmail] = useState("");
@@ -29,6 +31,10 @@ function LogIn() {
   const logInUser = async (event) => {
     event.preventDefault();
     updateStreak();
+    handleAddSessionToGroup("Sondre", "4", logInEmail);
+    handleAddSessionToGroup("Sondre", "økt1", logInEmail);
+
+    handleGetSessionInGroup("Sondre");
     signInWithEmailAndPassword(auth, logInEmail, logInPassword)
       .then((userCredential) => {
         console.log(userCredential);
