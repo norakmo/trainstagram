@@ -202,10 +202,6 @@ export default class WorkoutCreator extends React.Component {
                                             <MenuItem value={"Squat"}>Squat</MenuItem>
                                             <MenuItem value={"Benpress"}>Benpress</MenuItem>
                                             <MenuItem value={"BicepCurl"}>BicepCurl</MenuItem>
-                                            <MenuItem value={"Squat"}>Squat</MenuItem>
-                                            <MenuItem value={"Squat"}>Squat</MenuItem>
-                                            <MenuItem value={"Squat"}>Squat</MenuItem>
-                                            <MenuItem value={"Squat"}>Squat</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </TableCell>
