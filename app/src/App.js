@@ -18,6 +18,7 @@ import Program from "./Components/Program";
 import GroupBar from "./Components/GroupBar";
 // import FriendsList from "./Components/FriendsList";
 import NewGroup from "./Components/NewGroup";
+import WorkoutCreator from "./Components/WorkoutCreator";
 
 function App() {
   const dataRef = useRef();
@@ -47,10 +48,10 @@ function App() {
           }
         /> */}
         <Route
-          path="/Strength"
+          path="/WorkoutCreator"
           element={
             <div>
-              <Strength />
+              <WorkoutCreator />
               <MenuBar/>
             </div>
           }
