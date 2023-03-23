@@ -73,11 +73,17 @@ export default class FeedItem extends React.Component {
     }
   }
 
-  removeSession() {
-    const user = getCurrentUser();
-    console.log(user);
-    const isAdmin = handleGetAdmin(user);
-    handleRemoveSessionFromGroup(isAdmin, user, "Bestevenn", "hei");
+  async removeSession() {
+    try {
+      const user = await getCurrentUser();
+      if (user) {
+        const isAdmin = handleGetAdmin(user);
+        handleRemoveSessionFromGroup(isAdmin, user.email, "Kjørda", "tungt");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   onComment() {
