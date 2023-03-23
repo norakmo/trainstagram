@@ -18,6 +18,13 @@ export default class Feed extends React.Component{
     }
     
     componentDidMount(){
+        this.loadFriendSessions();
+    }
+
+    loadFriendSessions(){
+        this.setState({
+            sessions: "empty",
+        })
         getCurrentUser().then((user)=>{
             const TrainingSessions = handleGetTrainingSessions(user.email);
             TrainingSessions.then((Sessions)=>{

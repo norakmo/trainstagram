@@ -9,6 +9,7 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import FriendsList from "./FriendsList";
 import GroupBarElement from "./GroupBarElement";
 import GroupIcon from '@mui/icons-material/Group';
+import { touchRippleClasses } from "@mui/material";
 
 
 
@@ -20,16 +21,31 @@ export default class GroupBar extends React.Component{
         this.state = {
             groups: null,
             showFriends: false,
-            parent: props.props.parent
-        }; 
-        
+            parent: props.props.parent,
+            selected: "friends"
+        };
     }
 
 
 
     getGroup(name, admin){
+        if(this.state.selected !== "friends"){
+            document.getElementById(this.state.selected).style.color = "black";
+        }
         console.log("getgroup")
-        this.state.parent.loadGroup(name, admin);
+        if(this.state.selected === name){
+            this.setState({
+                selected: "friends"
+            })
+                
+            this.state.parent.loadFriendSessions();
+        }else{
+            this.setState({
+                selected: name
+            })
+            this.state.parent.loadGroup(name, admin);
+            document.getElementById(name).style.color = "white";
+        }
     }
 
     handleNewGroup(){
@@ -80,7 +96,7 @@ export default class GroupBar extends React.Component{
                         <div/>
                         :
                         this.state.groups.map((group)=>(
-                            <fab onClick={()=>{this.getGroup(group[0], group[1])}}>
+                            <fab onClick={()=>{this.getGroup(group[0], group[1])}} id={group[0]}>
                                 <div className="groupIconContainer">
                                     <GroupIcon class="Icon"></GroupIcon>
                                     <div>{group[0]}</div>
